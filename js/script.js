@@ -4,8 +4,8 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 console.log(c);
 
-canvas.width = 1024;
-canvas.height = 576;
+canvas.width = 1366;
+canvas.height = 768;
 
 const gravity = 0.5;
 
@@ -45,8 +45,8 @@ class Player {
             x: 0,
             y: 1
         }
-        this.height=200;
-        this.width=200;
+        this.height=100;
+        this.width=100;
     }
     draw() {
             //MAKES THE RED SQUARE
@@ -104,7 +104,13 @@ function animate(){
     //FILLS WHOLE THING WHITE
     c.fillStyle = 'white';
     c.fillRect(0,0,canvas.width,canvas.height);
+
+    // c.save()
+    // c.scale(2,2)
     background.update();
+    // c.restore();
+
+
     player.update();
     // player2.update();
 
