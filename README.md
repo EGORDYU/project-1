@@ -12,14 +12,15 @@ Be one of the last pandas on the brink of extinction trying to make it through t
 * Have a game screen with a start button and instructions
 * One type of enemy
 * Movement for central panda Up-Down, Left-Right
-* Have text show up that panda god is holding and be able to type it in
-* Typing in 5 correct prompts wins the game
+* Dodge for 30 seconds to win
 * Getting hit by projectile loses 1 life
 * Three lives lost and game ends
 * Have one stage
 
 
 ## Stretch Goals
+* Have text show up that panda god is holding and be able to type it in
+* Typing in 5 correct prompts wins the game
 * Game screen with current level and amount of lives for panda
 * Have the air units move left and right
 * Have the panda roll around when moving left and right
