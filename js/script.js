@@ -18,7 +18,25 @@ c.fillRect(0,0,canvas.width,canvas.height);
 
 //FUNCTIONS
 
+class Sprite {
+    constructor({position, imageSrc}){
+        this.position = position
+        this.image = new Image()
+        this.image.src = imageSrc
+    }
+    draw(){
+        if (!this.image) return
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+
+    update(){
+        this.draw()
+    }
+}
 //GRAVITY
+
+const pandaFace = new Image();
+pandaFace.src = './panda.png';
 
 class Player {
     constructor(position){
@@ -27,12 +45,13 @@ class Player {
             x: 0,
             y: 1
         }
-        this.height=100;
+        this.height=200;
+        this.width=200;
     }
     draw() {
             //MAKES THE RED SQUARE
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x,this.position.y,100,this.height);
+        c.fillRect(this.position.x,this.position.y,this.width,this.height);
+        c.drawImage(pandaFace, this.position.x, this.position.y, this.width, this.height);
     }
 
     update() {
@@ -52,7 +71,7 @@ class Player {
 
 const player = new Player({
     x:0,
-    y:0
+    y:0,
 })
 const player2 = new Player({
     x: 300,
@@ -71,14 +90,23 @@ const player2 = new Player({
     },
  }
 
+ const background = new Sprite({
+    position: {
+        x:0,
+        y:0,
+    },
+    imageSrc: './pandaria.png',
+ })
+
 //is in its own loop
 function animate(){
     window.requestAnimationFrame(animate)
     //FILLS WHOLE THING WHITE
     c.fillStyle = 'white';
     c.fillRect(0,0,canvas.width,canvas.height);
+    background.update();
     player.update();
-    player2.update();
+    // player2.update();
 
     player.velocity.x = 0
     if(keys.arrowRight.pressed){
@@ -107,7 +135,10 @@ window.addEventListener('keydown', (event) => {
         break
         case ' ':
             console.log('yup this is space');
-            player.velocity.y = -15;
+            if (player.position.y + player.height === canvas.height) {
+                // Only jump if player is on the ground
+                player.velocity.y = -15;
+            }
         break
         }
     })
