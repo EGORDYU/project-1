@@ -38,6 +38,48 @@ class Sprite {
 const pandaFace = new Image();
 pandaFace.src = './panda.png';
 
+class Monster {
+    constructor({position, imageSrc, speed, distance}) {
+      this.position = position;
+      this.image = new Image();
+      this.image.src = imageSrc;
+      this.speed = speed;
+      this.distance = distance;
+      this.direction = 1;
+    }
+  
+    draw() {
+      if (!this.image) return;
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+  
+    update() {
+      this.draw();
+      // move the monster horizontally
+      this.position.x += this.speed.x * this.direction;
+      // check if the monster has moved the specified distance in either direction and change direction
+      if (this.position.x >= this.distance || this.position.x <= 0) {
+        this.direction *= -1;
+      }
+    }
+  }
+  
+  const monster1 = new Monster({
+    position: { x: 100, y: 100 },
+    imageSrc: './mutalisk.png',
+    speed: { x: 5, y: 0 },
+    distance: 1200
+  });
+  
+  const monster2 = new Monster({
+    position: { x: 800, y: 100 },
+    imageSrc: './mutalisk.png',
+    speed: { x: -5, y: 0 },
+    distance: 1200,
+  });
+  
+
+
 class Player {
     constructor(position){
         this.position = position;
@@ -47,6 +89,7 @@ class Player {
         }
         this.height=100;
         this.width=100;
+        
     }
     draw() {
             //MAKES THE RED SQUARE
@@ -57,15 +100,18 @@ class Player {
     update() {
         this.draw()
         //moves it
-
+        
         this.position.y += this.velocity.y
         this.position.x += this.velocity.x
+        
         //increases speed
         if(this.position.y + this.height + this.velocity.y < canvas.height){
         this.velocity.y += gravity
         } else {
             this.velocity.y = 0;
         }
+
+        
     }
 }
 
@@ -73,10 +119,7 @@ const player = new Player({
     x:0,
     y:0,
 })
-const player2 = new Player({
-    x: 300,
-    y: 300
-})
+
 
  const keys = {
     arrowLeft: {
@@ -112,6 +155,8 @@ function animate(){
 
 
     player.update();
+    monster2.update();
+    monster1.update();
     // player2.update();
 
     player.velocity.x = 0
