@@ -4,3 +4,17 @@ body{
 canvas{
     background-color: black;
 }
+.livesLeft{
+    font-size: 2em;
+    width: 1366px;
+    display: flex;
+    justify-content: center; /* center child horizontally */
+    align-items: center; /* center child vertically */
+    height: 100%; /* set height to fill parent container */
+}
+#lifeText{
+    color: green;
+}
+#countdown{
+    color:red;
+}

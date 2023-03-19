@@ -43,7 +43,7 @@ class Projectile {
       this.x = x;
       this.y = y;
       this.angle = angle;
-      this.speed = 10;
+      this.speed = 5;
     }
   
     draw() {
@@ -63,6 +63,32 @@ class Projectile {
   }
 //ARRAY TO KEEP TRACK OF PROJECTILES
   const projectiles = [];
+  let lives = 3;
+
+
+  function checkProjectileCollision() {
+    for (let i = 0; i < projectiles.length; i++) {
+      const projectile = projectiles[i];
+      // check for collision between the player and the projectile
+      if (projectile.x > player.position.x && projectile.x < player.position.x + player.width &&
+          projectile.y > player.position.y && projectile.y < player.position.y + player.height) {
+        // decrease the lives and update the lifeText
+        lives--;
+        if(lives <= 0){
+            lifeText.innerText = "YOU LOST!"
+            return;
+        } else {
+            lifeText.innerText = `Lives left: ${lives}`;
+        }
+        // remove the projectile from the projectiles array
+        projectiles.splice(i, 1);
+        i--;
+        console.log('player hit');
+      }
+    }
+  }
+
+
 //CLASS FOR MONSTER
 class Monster {
     constructor({position, imageSrc, speed, distance}) {
@@ -88,8 +114,8 @@ class Monster {
           this.direction *= -1;
         }
       
-        const minInterval = 3000; // 3 seconds
-        const maxInterval = 5000; // 5 seconds
+        const minInterval = 2000; // 2 seconds
+        const maxInterval = 4000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
         // create a projectile every 3-5 seconds with math.random
@@ -166,8 +192,8 @@ class Player {
 }
 //new player start
 const player = new Player({
-    x:0,
-    y:0,
+    x:600,
+    y:500,
 })
 
 //checking if keys pressed
@@ -203,6 +229,7 @@ function animate() {
     player.update();
     monster2.update();
     monster1.update();
+    checkProjectileCollision();
   
     player.velocity.x = 0;
     if (keys.arrowRight.pressed) {
