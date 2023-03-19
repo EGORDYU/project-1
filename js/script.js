@@ -9,7 +9,7 @@ canvas.height = 768;
 
 const gravity = 0.5;
 
-c.fillStyle = 'white';
+c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
 
 
@@ -17,7 +17,7 @@ c.fillRect(0,0,canvas.width,canvas.height);
 
 
 //FUNCTIONS
-
+//IMAGES
 class Sprite {
     constructor({position, imageSrc}){
         this.position = position
@@ -33,11 +33,37 @@ class Sprite {
         this.draw()
     }
 }
-//GRAVITY
-
+//PLAYER 1 FACE
 const pandaFace = new Image();
 pandaFace.src = './panda.png';
 
+//PROJECTILE CLASS
+class Projectile {
+    constructor(x, y, angle) {
+      this.x = x;
+      this.y = y;
+      this.angle = angle;
+      this.speed = 10;
+    }
+  
+    draw() {
+      c.save();
+      c.translate(this.x, this.y);
+      c.rotate(this.angle);
+      c.fillStyle = 'red';
+      c.fillRect(0, 0, 10, 10);
+      c.restore();
+    }
+  
+    update() {
+      this.draw();
+      this.x += this.speed * Math.cos(this.angle);
+      this.y += this.speed * Math.sin(this.angle);
+    }
+  }
+//ARRAY TO KEEP TRACK OF PROJECTILES
+  const projectiles = [];
+//CLASS FOR MONSTER
 class Monster {
     constructor({position, imageSrc, speed, distance}) {
       this.position = position;
@@ -47,39 +73,63 @@ class Monster {
       this.distance = distance;
       this.direction = 1;
     }
-  
+    //DRAWS IMAGE OF MONSTER
     draw() {
       if (!this.image) return;
       c.drawImage(this.image, this.position.x, this.position.y);
     }
-  
+    //INVOKES DRAW + PROJECTILS
     update() {
-      this.draw();
-      // move the monster horizontally
-      this.position.x += this.speed.x * this.direction;
-      // check if the monster has moved the specified distance in either direction and change direction
-      if (this.position.x >= this.distance || this.position.x <= 0) {
-        this.direction *= -1;
+        this.draw();
+        // move the monster horizontally
+        this.position.x += this.speed.x * this.direction;
+        // check if the monster has moved the specified distance in either direction and change direction
+        if (this.position.x >= this.distance || this.position.x <= 0) {
+          this.direction *= -1;
+        }
+      
+        const minInterval = 3000; // 3 seconds
+        const maxInterval = 5000; // 5 seconds
+        const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
+
+        // create a projectile every 3-5 seconds with math.random
+        if (Date.now() % interval < 20) {
+          const angle = Math.atan2(player.position.y - this.position.y, player.position.x - this.position.x);
+          const projectile = new Projectile(this.position.x, this.position.y, angle);
+          projectiles.push(projectile);
+        }
+      
+        // updates projectile array for collision later
+        for (let i = 0; i < projectiles.length; i++) {
+          projectiles[i].update();
+          console.log(projectiles);
+        }
       }
-    }
   }
-  
+  //defining monster1
   const monster1 = new Monster({
     position: { x: 100, y: 100 },
     imageSrc: './mutalisk.png',
     speed: { x: 5, y: 0 },
     distance: 1200
   });
-  
+  //defining monster2
   const monster2 = new Monster({
     position: { x: 800, y: 100 },
     imageSrc: './mutalisk.png',
     speed: { x: -5, y: 0 },
     distance: 1200,
   });
+
+//   const monster3 = new Monster({
+//     position: {x:50, y: 700},
+//     imageSrc: './mutalisk.png',
+//     speed: {x: 0, y: 0},
+//     distance: 0,
+//   })
   
 
-
+//class for player
 class Player {
     constructor(position){
         this.position = position;
@@ -92,11 +142,11 @@ class Player {
         
     }
     draw() {
-            //MAKES THE RED SQUARE
+            //makes the panda
         c.fillRect(this.position.x,this.position.y,this.width,this.height);
         c.drawImage(pandaFace, this.position.x, this.position.y, this.width, this.height);
     }
-
+    //updates panda position and model
     update() {
         this.draw()
         //moves it
@@ -114,13 +164,13 @@ class Player {
         
     }
 }
-
+//new player start
 const player = new Player({
     x:0,
     y:0,
 })
 
-
+//checking if keys pressed
  const keys = {
     arrowLeft: {
         pressed: false,
@@ -132,7 +182,7 @@ const player = new Player({
         pressed: false,
     },
  }
-
+//WHERE TO PUT BACKGROUND
  const background = new Sprite({
     position: {
         x:0,
@@ -141,34 +191,35 @@ const player = new Player({
     imageSrc: './pandaria.png',
  })
 
-//is in its own loop
-function animate(){
-    window.requestAnimationFrame(animate)
+
+//is in its own loop makes the game run
+function animate() {
+    window.requestAnimationFrame(animate);
     //FILLS WHOLE THING WHITE
     c.fillStyle = 'white';
-    c.fillRect(0,0,canvas.width,canvas.height);
-
-    // c.save()
-    // c.scale(2,2)
+    c.fillRect(0, 0, canvas.width, canvas.height);
+  
     background.update();
-    // c.restore();
-
-
     player.update();
     monster2.update();
     monster1.update();
-    // player2.update();
-
-    player.velocity.x = 0
-    if(keys.arrowRight.pressed){
-        player.velocity.x =5;
-    } else if(keys.arrowLeft.pressed){
-        player.velocity.x = -5
-    }
-
-
   
-}
+    player.velocity.x = 0;
+    if (keys.arrowRight.pressed) {
+      player.velocity.x = 5;
+    } else if (keys.arrowLeft.pressed) {
+      player.velocity.x = -5;
+    }
+  
+    // clear projectiles that are out of bounds
+    for (let i = 0; i < projectiles.length; i++) {
+      const projectile = projectiles[i];
+      if (projectile.x < 0 || projectile.x > canvas.width || projectile.y < 0 || projectile.y > canvas.height) {
+        projectiles.splice(i, 1);
+        i--;
+      }
+    }
+  }
 
 //calls animation
 animate()
@@ -207,10 +258,3 @@ window.addEventListener('keydown', (event) => {
             }
         })
     
-//ENEMY SHOOTING
-
-//PROJECTILE CODE
-
-//WIN CONDITION TIMER
-
-//START SCREEN??
