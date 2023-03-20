@@ -2,6 +2,7 @@
 const canvas = document.querySelector('canvas');
 const startBtn = document.querySelector('#startBtn')
 const lossImg = document.querySelector('#lossImg')
+let main = document.querySelector('#main');
 //c = context
 const c = canvas.getContext('2d');
 // console.log(c);
@@ -84,6 +85,14 @@ class Projectile {
         if(lives <= 0){
             lifeText.innerText = "YOU LOST!"
             lossImg.style.display = 'inline';
+            startBtn.innerText = 'Try again';
+            isAnimating = false;
+            startBtn.addEventListener('click', function(){
+                if (!isAnimating) {
+                    animate();
+                  }
+                  main.style.display = 'inline';
+            })
             // gameEnd = true;
         } else {
             lifeText.innerText = `Lives left: ${lives}`;
@@ -359,7 +368,7 @@ function animate() {
       }
     }
     if(lives <= 0){
-        canvas.remove();
+        main.style.display = 'none';
     }
     }
   
