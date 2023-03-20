@@ -1,8 +1,8 @@
-console.log('hello world');
+// console.log('hello world');
 const canvas = document.querySelector('canvas');
 //c = context
 const c = canvas.getContext('2d');
-console.log(c);
+// console.log(c);
 
 canvas.width = 1366;
 canvas.height = 768;
@@ -12,7 +12,7 @@ const gravity = 0.5;
 c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
 
-
+let gameEnd = false;
 
 
 
@@ -35,7 +35,10 @@ class Sprite {
 }
 //PLAYER 1 FACE
 const pandaFace = new Image();
-pandaFace.src = './panda.png';
+pandaFace.onload = function() {
+    c.drawImage(pandaFace, 0, 0);
+}
+pandaFace.src = './panda.gif';
 
 //PROJECTILE CLASS
 class Projectile {
@@ -76,14 +79,13 @@ class Projectile {
         lives--;
         if(lives <= 0){
             lifeText.innerText = "YOU LOST!"
-            return;
+            gameEnd = true;
         } else {
             lifeText.innerText = `Lives left: ${lives}`;
         }
         // remove the projectile from the projectiles array
         projectiles.splice(i, 1);
         i--;
-        console.log('player hit');
       }
     }
   }
@@ -128,21 +130,20 @@ class Monster {
         // updates projectile array for collision later
         for (let i = 0; i < projectiles.length; i++) {
           projectiles[i].update();
-          console.log(projectiles);
         }
       }
   }
   //defining monster1
   const monster1 = new Monster({
     position: { x: 100, y: 100 },
-    imageSrc: './mutalisk.png',
+    imageSrc: './mutalisk.gif',
     speed: { x: 5, y: 0 },
     distance: 1200
   });
   //defining monster2
   const monster2 = new Monster({
     position: { x: 800, y: 100 },
-    imageSrc: './mutalisk.png',
+    imageSrc: './mutalisk.gif',
     speed: { x: -5, y: 0 },
     distance: 1200,
   });
@@ -191,7 +192,7 @@ class Player {
     }
 }
 //new player start
-const player = new Player({
+let player = new Player({
     x:600,
     y:500,
 })
@@ -214,9 +215,10 @@ const player = new Player({
         x:0,
         y:0,
     },
-    imageSrc: './pandaria.png',
+    imageSrc: './PandaMap.png',
  })
 
+ 
 
 //is in its own loop makes the game run
 function animate() {
@@ -226,6 +228,12 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height);
   
     background.update();
+
+
+    // collisionBlocks.forEach(collisionBlock => {
+    //     collisionBlock.update()
+    // })
+
     player.update();
     monster2.update();
     monster1.update();
@@ -255,15 +263,15 @@ animate()
 window.addEventListener('keydown', (event) => {
     switch (event.key){
         case 'ArrowRight':
-            console.log('moving right');
+            // console.log('moving right');
             keys.arrowRight.pressed = true;
         break
         case 'ArrowLeft':
-            console.log('moving left');
+            // console.log('moving left');
             keys.arrowLeft.pressed = true;
         break
         case ' ':
-            console.log('yup this is space');
+            // console.log('yup this is space');
             if (player.position.y + player.height === canvas.height) {
                 // Only jump if player is on the ground
                 player.velocity.y = -15;
@@ -275,11 +283,11 @@ window.addEventListener('keydown', (event) => {
     window.addEventListener('keyup', (event) => {
         switch (event.key){
             case 'ArrowRight':
-                console.log('moving right');
+                // console.log('moving right');
                 keys.arrowRight.pressed = false;
             break
             case 'ArrowLeft':
-                console.log('moving left');
+                // console.log('moving left');
                 keys.arrowLeft.pressed = false;
             break
             }
