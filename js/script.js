@@ -233,7 +233,7 @@ function animate() {
     background.update();
     
     collisionBlocks.forEach(collisionBlock => {
-        // collisionBlock.update();
+        collisionBlock.update();
     })
     
 
