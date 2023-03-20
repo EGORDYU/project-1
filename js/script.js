@@ -93,6 +93,7 @@ class Projectile {
                 lives = 3;
                 lifeText.innerText = `Lives left: ${lives}`
                 startBtn.style.display = 'none';
+                lossImg.style.display = 'none';
                 if (!isAnimating) {
                     animate();
                     console.log('working');
@@ -384,6 +385,7 @@ startBtn.addEventListener('click', function(){
     if (!isAnimating) {
         animate();
       }
+      startBtn.style.display ='none';
 })
 
 
