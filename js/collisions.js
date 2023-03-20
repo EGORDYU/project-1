@@ -48,7 +48,6 @@ const floorCollisions = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841, 841];
 
    
-    
     class CollisionBlock {
         constructor({position}){
             this.position = position
@@ -61,12 +60,28 @@ const floorCollisions = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
             c.fillRect(this.position.x,this.position.y,this.width,this.height)
         }
     }
+    
 
     const floorCollisions2D = []
     for (let i=0; i<floorCollisions.length; i +=86){
         floorCollisions2D.push(floorCollisions.slice(i,i + 86))
     }
 
-  
+    let collisionBlocks = [];
+    floorCollisions2D.forEach((row, y) =>{
+        row.forEach((symbol, x) =>{
+            if(symbol === 841){
+                console.log('draw a block')
+                collisionBlocks.push(
+                    new CollisionBlock({
+                    position:{
+                    x: x * 16,
+                    y: y * 16,
+                },
+            })
+            )
+            }
+    })
+})
 
 console.log(collisionBlocks);

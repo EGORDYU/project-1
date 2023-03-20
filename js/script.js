@@ -12,7 +12,7 @@ const gravity = 0.5;
 c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
 
-let gameEnd = false;
+// let gameEnd = false;
 
 
 
@@ -79,7 +79,7 @@ class Projectile {
         lives--;
         if(lives <= 0){
             lifeText.innerText = "YOU LOST!"
-            gameEnd = true;
+            // gameEnd = true;
         } else {
             lifeText.innerText = `Lives left: ${lives}`;
         }
@@ -191,10 +191,12 @@ class Player {
         
     }
 }
+
+
 //new player start
 let player = new Player({
     x:600,
-    y:500,
+    y:620,
 })
 
 //checking if keys pressed
@@ -227,12 +229,13 @@ function animate() {
     c.fillStyle = 'white';
     c.fillRect(0, 0, canvas.width, canvas.height);
   
+    
     background.update();
-
-
-    // collisionBlocks.forEach(collisionBlock => {
-    //     collisionBlock.update()
-    // })
+    
+    collisionBlocks.forEach(collisionBlock => {
+        // collisionBlock.update();
+    })
+    
 
     player.update();
     monster2.update();
@@ -254,6 +257,7 @@ function animate() {
         i--;
       }
     }
+
   }
 
 //calls animation
