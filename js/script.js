@@ -3,6 +3,7 @@ const canvas = document.querySelector('canvas');
 const startBtn = document.querySelector('#startBtn')
 const lossImg = document.querySelector('#lossImg')
 let main = document.querySelector('#main');
+let countdown = document.querySelector('#countdown');
 //c = context
 const c = canvas.getContext('2d');
 // console.log(c);
@@ -88,6 +89,7 @@ class Projectile {
             startBtn.style.display = 'inline';
             startBtn.innerText = 'Try again';
             isAnimating = false;
+            
 
             startBtn.addEventListener('click', function(){
                 lives = 3;
@@ -352,7 +354,6 @@ function animate() {
         platformBlock.update();
     })
     
-
     player.update();
     monster2.update();
     monster1.update();
@@ -386,8 +387,24 @@ startBtn.addEventListener('click', function(){
         animate();
       }
       startBtn.style.display ='none';
+      winTimer()
 })
 
+//win function
+function winTimer(){
+    let timeLeft = 30;
+    const interval = setInterval(() => {
+      timeLeft--;
+      countdown.innerText = `${timeLeft} seconds left`;
+      if(lives === 0){
+        clearInterval(interval);
+        countdown.innerText = `You had ${timeLeft} seconds left`
+      }else if(timeLeft === 0) {
+        clearInterval(interval);
+        // Do something when the countdown is finished
+      }
+    }, 1000);
+  }
 
 //MOVEMENT
 window.addEventListener('keydown', (event) => {
