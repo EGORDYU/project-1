@@ -21,3 +21,6 @@ canvas{
 #startBtn{
     font-size: 30px;
 }
+#lossImg{
+    display: none;
+}

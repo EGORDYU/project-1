@@ -1,6 +1,7 @@
 // console.log('hello world');
 const canvas = document.querySelector('canvas');
 const startBtn = document.querySelector('#startBtn')
+const lossImg = document.querySelector('#lossImg')
 //c = context
 const c = canvas.getContext('2d');
 // console.log(c);
@@ -82,6 +83,7 @@ class Projectile {
         lives--;
         if(lives <= 0){
             lifeText.innerText = "YOU LOST!"
+            lossImg.style.display = 'inline';
             // gameEnd = true;
         } else {
             lifeText.innerText = `Lives left: ${lives}`;
@@ -355,6 +357,9 @@ function animate() {
         projectiles.splice(i, 1);
         i--;
       }
+    }
+    if(lives <= 0){
+        canvas.remove();
     }
     }
   
