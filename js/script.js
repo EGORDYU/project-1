@@ -156,16 +156,31 @@ class Monster {
 //   })
   
 
+//refactored function to make easier
+function collision({
+    object1,
+    object2
+}){
+    return(
+    object1.position.y + object1.height >= object2.position.y &&
+    object1.position.y <= object2.position.y + object2.height &&
+    object1.position.x <= object2.position.x + object2.width && 
+    object1.position.x + object1.width >= object2.position.x 
+    )
+}
+
 //class for player
 class Player {
-    constructor(position){
+    constructor({position, collisionBlocks, platformBlocks}){
         this.position = position;
         this.velocity = {
             x: 0,
             y: 1
         }
-        this.height=100;
-        this.width=100;
+        this.height = 100;
+        this.width = 100;
+        this.collisionBlocks = collisionBlocks
+        this.platformBlocks = platformBlocks
         
     }
     draw() {
@@ -177,26 +192,99 @@ class Player {
     update() {
         this.draw()
         //moves it
-        
-        this.position.y += this.velocity.y
         this.position.x += this.velocity.x
+        this.checkForHorizontalCollisions();
+        this.applyGravity();
+        this.checkForVerticalCollisions()
         
         //increases speed
-        if(this.position.y + this.height + this.velocity.y < canvas.height){
-        this.velocity.y += gravity
-        } else {
-            this.velocity.y = 0;
+       
+        
+        
+    }
+
+    checkForHorizontalCollisions(){
+        for(let i=0; i<this.collisionBlocks.length; i++){
+            const collisionBlock = this.collisionBlocks[i]
+
+            if(collision({
+                object1: this,
+                object2: collisionBlock,
+            })
+            ){
+                if(this.velocity.x > 0){
+                    this.velocity.x = 0
+                    this.position.x = collisionBlock.position.x - this.width - 0.01
+                    break;
+                }
+
+                if(this.velocity.x < 0){
+                    this.velocity.x =0
+                    this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
+                    break;
+                }
+            }
         }
+    }
+
+
+    applyGravity(){
+        this.position.y += this.velocity.y
+        this.velocity.y += gravity
+    }
+
+    checkForVerticalCollisions(){
+        for(let i=0; i<this.collisionBlocks.length; i++){
+            const collisionBlock = this.collisionBlocks[i]
+
+            if(collision({
+                object1: this,
+                object2: collisionBlock,
+            })
+            ){
+                if(this.velocity.y > 0){
+                    this.velocity.y = 0
+                    this.position.y = collisionBlock.position.y - this.height - 0.01
+                    break;
+                }
+
+                if(this.velocity.y < 0){
+                    this.velocity.y =0
+                    this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
+                    break;
+                }
+            }
+        }
+        //for platform collision blocks
+        for(let i=0; i<this.platformBlocks.length; i++){
+            const platformBlock = this.platformBlocks[i]
+
+            if(collision({
+                object1: this,
+                object2: platformBlock,
+            })
+            ){
+                if(this.velocity.y > 0){
+                    this.velocity.y = 0
+                    this.position.y = platformBlock.position.y - this.height - 0.01
+                    break;
+                }
 
         
+            }
+        }
     }
 }
 
 
 //new player start
-let player = new Player({
+const player = new Player({
+    position:{
     x:600,
-    y:620,
+    y:300,
+    },
+    collisionBlocks,
+    platformBlocks,
 })
 
 //checking if keys pressed
@@ -235,6 +323,10 @@ function animate() {
     collisionBlocks.forEach(collisionBlock => {
         collisionBlock.update();
     })
+
+    platformBlocks.forEach(platformBlock => {
+        platformBlock.update();
+    })
     
 
     player.update();
@@ -244,6 +336,7 @@ function animate() {
   
     player.velocity.x = 0;
     if (keys.arrowRight.pressed) {
+        // console.log('pressed');
       player.velocity.x = 5;
     } else if (keys.arrowLeft.pressed) {
       player.velocity.x = -5;
@@ -275,13 +368,12 @@ window.addEventListener('keydown', (event) => {
             keys.arrowLeft.pressed = true;
         break
         case ' ':
-            // console.log('yup this is space');
-            if (player.position.y + player.height === canvas.height) {
-                // Only jump if player is on the ground
-                player.velocity.y = -15;
-            }
-        break
-        }
+
+        // Only jump if player is on the ground
+        player.velocity.y = -15;
+}
+      
+        
     })
 
     window.addEventListener('keyup', (event) => {
