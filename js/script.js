@@ -85,11 +85,17 @@ class Projectile {
         if(lives <= 0){
             lifeText.innerText = "YOU LOST!"
             lossImg.style.display = 'inline';
+            startBtn.style.display = 'inline';
             startBtn.innerText = 'Try again';
             isAnimating = false;
+
             startBtn.addEventListener('click', function(){
+                lives = 3;
+                lifeText.innerText = `Lives left: ${lives}`
+                startBtn.style.display = 'none';
                 if (!isAnimating) {
                     animate();
+                    console.log('working');
                   }
                   main.style.display = 'inline';
             })
