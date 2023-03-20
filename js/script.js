@@ -1,5 +1,6 @@
 // console.log('hello world');
 const canvas = document.querySelector('canvas');
+const startBtn = document.querySelector('#startBtn')
 //c = context
 const c = canvas.getContext('2d');
 // console.log(c);
@@ -8,6 +9,8 @@ canvas.width = 1366;
 canvas.height = 768;
 
 const gravity = 0.5;
+let isAnimating = false;
+
 
 c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
@@ -312,6 +315,9 @@ const player = new Player({
 
 //is in its own loop makes the game run
 function animate() {
+    if (!isAnimating) {
+        isAnimating = true;
+    }
     window.requestAnimationFrame(animate);
     //FILLS WHOLE THING WHITE
     c.fillStyle = 'white';
@@ -350,11 +356,16 @@ function animate() {
         i--;
       }
     }
-
-  }
+    }
+  
 
 //calls animation
-animate()
+startBtn.addEventListener('click', function(){
+    if (!isAnimating) {
+        animate();
+      }
+})
+
 
 //MOVEMENT
 window.addEventListener('keydown', (event) => {
