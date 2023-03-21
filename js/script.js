@@ -14,6 +14,7 @@ canvas.height = 768;
 const gravity = 0.5;
 let isAnimating = false;
 let gameEnd = false;
+let grounded = false;
 
 c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
@@ -44,7 +45,7 @@ const pandaFace = new Image();
 pandaFace.onload = function() {
     c.drawImage(pandaFace, 0, 0);
 }
-pandaFace.src = './panda.gif';
+pandaFace.src = './panda.png';
 
 //PROJECTILE CLASS
 class Projectile {
@@ -224,6 +225,9 @@ class Player {
         } else if (this.position.y + this.height > canvas.height) {
             this.position.y = canvas.height - this.height;
         }
+
+
+       
         this.draw()
         //moves it
         this.position.x += this.velocity.x
@@ -249,12 +253,15 @@ class Player {
                 if(this.velocity.x > 0){
                     this.velocity.x = 0
                     this.position.x = collisionBlock.position.x - this.width - 0.01
+                    grounded = true;
                     break;
+                    
                 }
 
                 if(this.velocity.x < 0){
                     this.velocity.x =0
                     this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
+                    grounded = true;
                     break;
                 }
             }
@@ -279,12 +286,14 @@ class Player {
                 if(this.velocity.y > 0){
                     this.velocity.y = 0
                     this.position.y = collisionBlock.position.y - this.height - 0.01
+                    grounded = true;
                     break;
                 }
 
                 if(this.velocity.y < 0){
                     this.velocity.y =0
                     this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
+                    grounded = true;
                     break;
                 }
             }
@@ -301,6 +310,7 @@ class Player {
                 if(this.velocity.y > 0){
                     this.velocity.y = 0
                     this.position.y = platformBlock.position.y - this.height - 0.01
+                    grounded = true;
                     break;
                 }
 
@@ -371,6 +381,7 @@ function animate() {
     monster1.update();
     checkProjectileCollision();
     }
+    console.log(grounded);
   
     player.velocity.x = 0;
     if (keys.arrowRight.pressed) {
@@ -446,9 +457,10 @@ window.addEventListener('keydown', (event) => {
             keys.arrowLeft.pressed = true;
         break
         case ' ':
-
-        // Jump every 3 seconds
+        if(grounded === true){
         player.velocity.y = -15;
+        }
+        grounded = false;
 }
       
         

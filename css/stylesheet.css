@@ -1,9 +1,8 @@
 body{
-    background-color: black;
+    background-color: wheat;
+    margin-left: 250px;
 }
-canvas{
-    background-color: black;
-}
+
 .livesLeft{
     font-size: 2em;
     width: 1366px;
@@ -14,13 +13,26 @@ canvas{
 }
 #lifeText{
     color: green;
+    margin:0;
 }
 #countdown{
-    color:red;
+    background-color: red;
+    color: white;
 }
 #startBtn{
     font-size: 30px;
 }
 #lossImg{
     display: none;
+}
+#main{
+    display: flex;
+    justify-content: center;
+}
+#canvas{
+    background-color: black;
+    justify-content: center;
+}
+#instructions{
+    margin:0;
 }
