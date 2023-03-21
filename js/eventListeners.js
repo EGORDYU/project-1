@@ -49,5 +49,10 @@ window.addEventListener('keydown', (event) => {
 
 
       nextlvlBtn.addEventListener('click', function(){
-        animate2();
+        gameEnd = false;
+        if (isAnimating) {
+          animate2();
+        }
+          
+
       })

@@ -16,6 +16,8 @@ const gravity = 0.5;
 let isAnimating = false;
 let gameEnd = false;
 let grounded = false;
+let lvl1Won = false;
+
 
 c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
@@ -77,7 +79,23 @@ pandaFace.src = './panda.png';
     }
   }
 
+  const player = new Player({
+    position:{
+    x:600,
+    y:300,
+    },
+    collisionBlocks,
+    platformBlocks,
+})
 
+const player2 = new Player({
+    position: { 
+    x: 600,
+    y: 300,
+    },
+    collisionBlocks: collisionBlocks2,
+    platformBlocks: platformBlocks2
+});
 
   //defining monster1
   const monster1 = new Monster({
@@ -118,15 +136,6 @@ function collision({
 
 
 
-//new player start
-const player = new Player({
-    position:{
-    x:600,
-    y:300,
-    },
-    collisionBlocks,
-    platformBlocks,
-})
 
 //checking if keys pressed
  const keys = {
@@ -155,7 +164,10 @@ function animate() {
     if (!isAnimating) {
         isAnimating = true;
     }
+    
+    if(!lvl1Won){
     window.requestAnimationFrame(animate);
+    }
     //FILLS WHOLE THING WHITE
     c.fillStyle = 'white';
     c.fillRect(0, 0, canvas.width, canvas.height);
@@ -179,6 +191,7 @@ function animate() {
     }
     console.log(grounded);
   
+    if(!lvl1Won){
     player.velocity.x = 0;
     if (keys.arrowRight.pressed) {
         // console.log('pressed');
@@ -186,7 +199,7 @@ function animate() {
     } else if (keys.arrowLeft.pressed) {
       player.velocity.x = -5;
     }
-  
+}
     // clear projectiles that are out of bounds
     for (let i = 0; i < projectiles.length; i++) {
       const projectile = projectiles[i];
@@ -220,7 +233,8 @@ function winTimer(){
         lossImg.style.display = 'inline';
         player.position.x = 600;
         player.position.y = 300;
-        isAnimating = false;
+        isAnimating = true;
+        lvl1Won = true;
         nextlvlBtn.innerText = 'Next level';
         main.style.display = 'none';
         countdown.innerText = `You survived!`;
@@ -235,7 +249,7 @@ const background2 = new Sprite({
         x:0,
         y:0,
     },
-    imageSrc: './PandaMap2.png',
+    imageSrc:'./PandaMap2.png',
  })
 
 //level 2 function
@@ -245,20 +259,43 @@ function animate2() {
         isAnimating = true;
     }
 
-    window.requestAnimationFrame(animate);
+    isAnimating = false;
+
+    window.requestAnimationFrame(animate2);
     //FILLS WHOLE THING WHITE
     c.fillStyle = 'white';
     c.fillRect(0, 0, canvas.width, canvas.height);
-
+    console.log(gameEnd);
 
 
     main.style.display = 'inline';
     background2.update();
 
     if(!gameEnd){
-        player.update();
+        player2.update();
         monster2.update();
         monster1.update();
         checkProjectileCollision();
+        }
+
+
+        player2.velocity.x = 0;
+        if (keys.arrowRight.pressed) {
+            // console.log('pressed');
+          player2.velocity.x = 5;
+        } else if (keys.arrowLeft.pressed) {
+          player2.velocity.x = -5;
+        }
+      
+        // clear projectiles that are out of bounds
+        for (let i = 0; i < projectiles.length; i++) {
+          const projectile = projectiles[i];
+          if (projectile.x < 0 || projectile.x > canvas.width || projectile.y < 0 || projectile.y > canvas.height) {
+            projectiles.splice(i, 1);
+            i--;
+          }
+        }
+        if(lives <= 0){
+            main.style.display = 'none';
         }
 }
