@@ -13,7 +13,7 @@ canvas.height = 768;
 
 const gravity = 0.5;
 let isAnimating = false;
-
+let gameEnd = false;
 
 c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
@@ -355,10 +355,12 @@ function animate() {
         platformBlock.update();
     })
     
+    if(!gameEnd){
     player.update();
     monster2.update();
     monster1.update();
     checkProjectileCollision();
+    }
   
     player.velocity.x = 0;
     if (keys.arrowRight.pressed) {
@@ -390,6 +392,11 @@ startBtn.addEventListener('click', function(){
       }
       startBtn.style.display ='none';
       winTimer();
+      gameEnd = false;
+      main.style.display = 'inline';
+      lossImg.style.display = 'none';
+      lives = 3;
+      lifeText.innerText = `Lives left: ${lives}`
 })
 
 //win function
@@ -403,7 +410,9 @@ function winTimer(){
         countdown.innerText = `You had ${timeLeft} seconds left`
       }else if(timeLeft === 0) {
         clearInterval(interval);
+        gameEnd = true;
         lifeText.innerText = 'YOU WON LETS GOOOOO'
+        startBtn.style.display = 'inline';
         lossImg.style.display = 'inline';
         isAnimating = false;
         startBtn.innerText = 'Again?';
