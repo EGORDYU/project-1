@@ -18,7 +18,7 @@ let isAnimating = false;
 c.fillStyle = 'black';
 c.fillRect(0,0,canvas.width,canvas.height);
 
-// let gameEnd = false;
+
 
 
 
@@ -96,6 +96,7 @@ class Projectile {
                 lifeText.innerText = `Lives left: ${lives}`
                 startBtn.style.display = 'none';
                 lossImg.style.display = 'none';
+                
                 if (!isAnimating) {
                     animate();
                     console.log('working');
@@ -378,6 +379,7 @@ function animate() {
     if(lives <= 0){
         main.style.display = 'none';
     }
+    
     }
   
 
@@ -387,7 +389,7 @@ startBtn.addEventListener('click', function(){
         animate();
       }
       startBtn.style.display ='none';
-      winTimer()
+      winTimer();
 })
 
 //win function
@@ -401,10 +403,17 @@ function winTimer(){
         countdown.innerText = `You had ${timeLeft} seconds left`
       }else if(timeLeft === 0) {
         clearInterval(interval);
-        // Do something when the countdown is finished
+        lifeText.innerText = 'YOU WON LETS GOOOOO'
+        lossImg.style.display = 'inline';
+        isAnimating = false;
+        startBtn.innerText = 'Again?';
+        main.style.display = 'none';
+        countdown.innerText = `You survived!`;
+        
       }
-    }, 1000);
-  }
+},1000)
+}
+
 
 //MOVEMENT
 window.addEventListener('keydown', (event) => {
@@ -419,7 +428,7 @@ window.addEventListener('keydown', (event) => {
         break
         case ' ':
 
-        // Only jump if player is on the ground
+        // Jump every 3 seconds
         player.velocity.y = -15;
 }
       
@@ -438,4 +447,3 @@ window.addEventListener('keydown', (event) => {
             break
             }
         })
-    
