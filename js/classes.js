@@ -160,7 +160,7 @@ class Projectile {
       c.translate(this.x, this.y);
       c.rotate(this.angle);
       c.fillStyle = 'red';
-      c.fillRect(0, 0, 10, 10);
+      c.fillRect(0, 0, 20, 20);
       c.restore();
     }
   
@@ -198,8 +198,8 @@ class Monster {
           this.direction *= -1;
         }
       
-        const minInterval = 2000; // 2 seconds
-        const maxInterval = 4000; // 4 seconds
+        const minInterval = 1000; // 2 seconds
+        const maxInterval = 2000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
         // create a projectile every 3-5 seconds with math.random
@@ -241,8 +241,8 @@ class Monster {
           this.direction *= -1;
         }
       
-        const minInterval = 2000; // 2 seconds
-        const maxInterval = 4000; // 4 seconds
+        const minInterval = 1000; // 2 seconds
+        const maxInterval = 2000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
         // create a projectile every 3-5 seconds with math.random

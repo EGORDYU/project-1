@@ -54,6 +54,8 @@ window.addEventListener('keydown', (event) => {
 
 
       nextlvlBtn.addEventListener('click', function(){
+        nextlvlBtn.style.display = 'none';
+        lives = 3;
         lifeText.innerText = `Lives left:${lives}`;
         gameEnd = false;
         if (isAnimating) {

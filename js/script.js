@@ -192,47 +192,6 @@ function animate() {
     }
   
 
-//calls animation
-//win function
-function winTimer(level){
-    let timeLeft = 5;
-    const interval = setInterval(() => {
-      timeLeft--;
-      countdown.innerText = `${timeLeft} seconds left`;
-      if(lives === 0){
-        clearInterval(interval);
-        countdown.innerText = `You had ${timeLeft} seconds left`
-      }else if(timeLeft === 0 && lvl1Won == false) {
-        clearInterval(interval);
-        gameEnd = true;
-        lifeText.innerText = 'YOU BEAT LVL 1 LETS GOOOOO'
-        nextlvlBtn.style.display = 'inline';
-        lossImg.style.display = 'inline';
-        level.position.x = 600;
-        level.position.y = 300;
-        isAnimating = true;
-        lvl1Won = true;
-        main.style.display = 'none';
-        countdown.innerText = `You survived!`;
-
-        
-      } else if (timeLeft === 0 && lvl1Won == true && lvl2Won == false){
-        clearInterval(interval);
-        gameEnd = true;
-        lifeText.innerText = 'YOU BEAT LVL 2 LETS GOOOOO'
-        level.position.x = 600;
-        level.position.y = 300;
-        isAnimating = true;
-        nextlvlBtn.innerText = 'Under Construction';
-        lvl2Won = true;
-        main.style.display = 'none';
-        countdown.innerText = `You survived!`;
-      } else if (lvl2Won == true) {
-        clearInterval(interval);
-      }
-    
-},1000)
-}
 
 const background2 = new Sprite({
     position: {
@@ -253,7 +212,7 @@ function animate2() {
 
     window.requestAnimationFrame(animate2);
     //FILLS WHOLE THING WHITE
-    c.fillStyle = 'white';
+    c.fillStyle = 'rgb(255,0,0,0)';
     c.fillRect(0, 0, canvas.width, canvas.height);
     console.log(gameEnd);
 
@@ -267,7 +226,7 @@ function animate2() {
         monster12.update();
         checkProjectileCollision(player2);
         }
-
+        
         player2.velocity.x = 0;
         if (keys.arrowRight.pressed) {
             // console.log('pressed');
@@ -287,4 +246,49 @@ function animate2() {
         if(lives <= 0){
             main.style.display = 'none';
         }
+}
+
+
+//calls animation
+//win function
+function winTimer(level){
+    let timeLeft = 30;
+    const interval = setInterval(() => {
+      timeLeft--;
+      countdown.innerText = `${timeLeft} seconds left`;
+      if(lives === 0){
+        clearInterval(interval);
+        countdown.innerText = `You had ${timeLeft} seconds left`
+        lossImg.style.display = 'inline';
+        nextlvlBtn.style.display = 'none';
+      }else if(timeLeft === 0 && lvl1Won == false) {
+        clearInterval(interval);
+        gameEnd = true;
+        lifeText.innerText = 'YOU BEAT LVL 1 LETS GOOOOO'
+        nextlvlBtn.style.display = 'inline';
+        level.position.x = 600;
+        level.position.y = 300;
+        isAnimating = true;
+        lvl1Won = true;
+        main.style.display = 'none';
+        countdown.innerText = `You survived!`;
+        
+      }else if (timeLeft === 0 && lvl1Won == true && lvl2Won == false && lives > 0){
+        nextlvlBtn.style.display = 'none';
+        clearInterval(interval);
+        gameEnd = true;
+        lifeText.innerText = 'YOU BEAT LVL 2 LETS GOOOOO'
+        level.position.x = 600;
+        level.position.y = 300;
+        isAnimating = true;
+        nextlvlBtn.innerText = 'Under Construction';
+        lvl2Won = true;
+        main.style.display = 'none';
+        countdown.innerText = `You survived!`;
+      } else if (lvl2Won == true) {
+        countdown.innerText = `T-t-t-thats all folks`
+        main.style.display = 'none';
+      }
+    
+},1000)
 }
