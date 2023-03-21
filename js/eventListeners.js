@@ -27,8 +27,13 @@ window.addEventListener('keydown', (event) => {
       case ' ':
       if(grounded === true){
       player.velocity.y = -15;
+      if(lvl1Won === true){
+      player2.velocity.y = -15;
+      }
       }
       grounded = false;
+      break
+      
 }
     
       

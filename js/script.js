@@ -37,47 +37,7 @@ pandaFace.src = './panda.png';
   let lives = 3;
 
 
-  function checkProjectileCollision() {
-    for (let i = 0; i < projectiles.length; i++) {
-      const projectile = projectiles[i];
-      // check for collision between the player and the projectile
-      if (projectile.x > player.position.x && projectile.x < player.position.x + player.width &&
-          projectile.y > player.position.y && projectile.y < player.position.y + player.height) {
-        // decrease the lives and update the lifeText
-        lives--;
-        if(lives <= 0){
-            lifeText.innerText = "YOU LOST!"
-            lossImg.style.display = 'inline';
-            startBtn.style.display = 'inline';
-            startBtn.innerText = 'Try again';
-            player.position.x = 600;
-            player.position.y = 300;
-            isAnimating = false;
-            
-
-            startBtn.addEventListener('click', function(){
-                lives = 3;
-                lifeText.innerText = `Lives left: ${lives}`
-                startBtn.style.display = 'none';
-                lossImg.style.display = 'none';
-
-                
-                if (!isAnimating) {
-                    animate();
-                    console.log('working');
-                  }
-                  main.style.display = 'inline';
-            })
-            // gameEnd = true;
-        } else {
-            lifeText.innerText = `Lives left: ${lives}`;
-        }
-        // remove the projectile from the projectiles array
-        projectiles.splice(i, 1);
-        i--;
-      }
-    }
-  }
+ 
 
   const player = new Player({
     position:{
@@ -106,6 +66,21 @@ const player2 = new Player({
   });
   //defining monster2
   const monster2 = new Monster({
+    position: { x: 800, y: 100 },
+    imageSrc: './mutalisk.gif',
+    speed: { x: -5, y: 0 },
+    distance: 1200,
+  });
+
+  //defining monster1
+  const monster12 = new Monsterlvl2({
+    position: { x: 100, y: 100 },
+    imageSrc: './mutalisk.gif',
+    speed: { x: 5, y: 0 },
+    distance: 1200
+  });
+  //defining monster2
+  const monster22 = new Monsterlvl2({
     position: { x: 800, y: 100 },
     imageSrc: './mutalisk.gif',
     speed: { x: -5, y: 0 },
@@ -163,7 +138,8 @@ function collision({
 function animate() {
     if (!isAnimating) {
         isAnimating = true;
-    }
+    } 
+    
     
     if(!lvl1Won){
     window.requestAnimationFrame(animate);
@@ -189,7 +165,7 @@ function animate() {
     monster1.update();
     checkProjectileCollision();
     }
-    console.log(grounded);
+
   
     if(!lvl1Won){
     player.velocity.x = 0;
@@ -273,11 +249,10 @@ function animate2() {
 
     if(!gameEnd){
         player2.update();
-        monster2.update();
-        monster1.update();
-        checkProjectileCollision();
+        monster22.update();
+        monster12.update();
+        checkProjectileCollision2();
         }
-
 
         player2.velocity.x = 0;
         if (keys.arrowRight.pressed) {
