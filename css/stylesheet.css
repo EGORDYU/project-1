@@ -36,3 +36,7 @@ body{
 #instructions{
     margin:0;
 }
+#nextlvlBtn{
+    display: none;
+    font-size: 30px;
+}

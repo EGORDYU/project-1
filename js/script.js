@@ -4,6 +4,7 @@ const startBtn = document.querySelector('#startBtn')
 const lossImg = document.querySelector('#lossImg')
 let main = document.querySelector('#main');
 let countdown = document.querySelector('#countdown');
+let nextlvlBtn = document.querySelector('#nextlvlBtn');
 //c = context
 const c = canvas.getContext('2d');
 // console.log(c);
@@ -21,25 +22,6 @@ c.fillRect(0,0,canvas.width,canvas.height);
 
 
 
-
-
-//FUNCTIONS
-//IMAGES
-class Sprite {
-    constructor({position, imageSrc}){
-        this.position = position
-        this.image = new Image()
-        this.image.src = imageSrc
-    }
-    draw(){
-        if (!this.image) return
-        c.drawImage(this.image, this.position.x, this.position.y)
-    }
-
-    update(){
-        this.draw()
-    }
-}
 //PLAYER 1 FACE
 const pandaFace = new Image();
 pandaFace.onload = function() {
@@ -47,30 +29,7 @@ pandaFace.onload = function() {
 }
 pandaFace.src = './panda.png';
 
-//PROJECTILE CLASS
-class Projectile {
-    constructor(x, y, angle) {
-      this.x = x;
-      this.y = y;
-      this.angle = angle;
-      this.speed = 5;
-    }
-  
-    draw() {
-      c.save();
-      c.translate(this.x, this.y);
-      c.rotate(this.angle);
-      c.fillStyle = 'red';
-      c.fillRect(0, 0, 10, 10);
-      c.restore();
-    }
-  
-    update() {
-      this.draw();
-      this.x += this.speed * Math.cos(this.angle);
-      this.y += this.speed * Math.sin(this.angle);
-    }
-  }
+
 //ARRAY TO KEEP TRACK OF PROJECTILES
   const projectiles = [];
   let lives = 3;
@@ -119,48 +78,7 @@ class Projectile {
   }
 
 
-//CLASS FOR MONSTER
-class Monster {
-    constructor({position, imageSrc, speed, distance}) {
-      this.position = position;
-      this.image = new Image();
-      this.image.src = imageSrc;
-      this.speed = speed;
-      this.distance = distance;
-      this.direction = 1;
-    }
-    //DRAWS IMAGE OF MONSTER
-    draw() {
-      if (!this.image) return;
-      c.drawImage(this.image, this.position.x, this.position.y);
-    }
-    //INVOKES DRAW + PROJECTILS
-    update() {
-        this.draw();
-        // move the monster horizontally
-        this.position.x += this.speed.x * this.direction;
-        // check if the monster has moved the specified distance in either direction and change direction
-        if (this.position.x >= this.distance || this.position.x <= 0) {
-          this.direction *= -1;
-        }
-      
-        const minInterval = 2000; // 2 seconds
-        const maxInterval = 4000; // 4 seconds
-        const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
-        // create a projectile every 3-5 seconds with math.random
-        if (Date.now() % interval < 20) {
-          const angle = Math.atan2(player.position.y - this.position.y, player.position.x - this.position.x);
-          const projectile = new Projectile(this.position.x, this.position.y, angle);
-          projectiles.push(projectile);
-        }
-      
-        // updates projectile array for collision later
-        for (let i = 0; i < projectiles.length; i++) {
-          projectiles[i].update();
-        }
-      }
-  }
   //defining monster1
   const monster1 = new Monster({
     position: { x: 100, y: 100 },
@@ -197,131 +115,7 @@ function collision({
     )
 }
 
-//class for player
-class Player {
-    constructor({position, collisionBlocks, platformBlocks}){
-        this.position = position;
-        this.velocity = {
-            x: 0,
-            y: 1
-        }
-        this.height = 100;
-        this.width = 100;
-        this.collisionBlocks = collisionBlocks
-        this.platformBlocks = platformBlocks
-        
-    }
-    draw() {
-            //makes the panda
-        c.fillRect(this.position.x,this.position.y,this.width,this.height);
-        c.drawImage(pandaFace, this.position.x, this.position.y, this.width, this.height);
-    }
-    //updates panda position and model
-    update() {
-        if (this.position.x < 0) {
-            this.position.x = 0;
-        } else if (this.position.x + this.width > canvas.width) {
-            this.position.x = canvas.width - this.width;
-        }
-        if (this.position.y < 0) {
-            this.position.y = 0;
-        } else if (this.position.y + this.height > canvas.height) {
-            this.position.y = canvas.height - this.height;
-        }
 
-
-       
-        this.draw()
-        //moves it
-        this.position.x += this.velocity.x
-        this.checkForHorizontalCollisions();
-        this.applyGravity();
-        this.checkForVerticalCollisions()
-        
-        //increases speed
-       
-        
-        
-    }
-
-    checkForHorizontalCollisions(){
-        for(let i=0; i<this.collisionBlocks.length; i++){
-            const collisionBlock = this.collisionBlocks[i]
-
-            if(collision({
-                object1: this,
-                object2: collisionBlock,
-            })
-            ){
-                if(this.velocity.x > 0){
-                    this.velocity.x = 0
-                    this.position.x = collisionBlock.position.x - this.width - 0.01
-                    grounded = true;
-                    break;
-                    
-                }
-
-                if(this.velocity.x < 0){
-                    this.velocity.x =0
-                    this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
-                    grounded = true;
-                    break;
-                }
-            }
-        }
-    }
-
-
-    applyGravity(){
-        this.position.y += this.velocity.y
-        this.velocity.y += gravity
-    }
-
-    checkForVerticalCollisions(){
-        for(let i=0; i<this.collisionBlocks.length; i++){
-            const collisionBlock = this.collisionBlocks[i]
-
-            if(collision({
-                object1: this,
-                object2: collisionBlock,
-            })
-            ){
-                if(this.velocity.y > 0){
-                    this.velocity.y = 0
-                    this.position.y = collisionBlock.position.y - this.height - 0.01
-                    grounded = true;
-                    break;
-                }
-
-                if(this.velocity.y < 0){
-                    this.velocity.y =0
-                    this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
-                    grounded = true;
-                    break;
-                }
-            }
-        }
-        //for platform collision blocks
-        for(let i=0; i<this.platformBlocks.length; i++){
-            const platformBlock = this.platformBlocks[i]
-
-            if(collision({
-                object1: this,
-                object2: platformBlock,
-            })
-            ){
-                if(this.velocity.y > 0){
-                    this.velocity.y = 0
-                    this.position.y = platformBlock.position.y - this.height - 0.01
-                    grounded = true;
-                    break;
-                }
-
-        
-            }
-        }
-    }
-}
 
 
 //new player start
@@ -346,7 +140,6 @@ const player = new Player({
         pressed: false,
     },
  }
-//WHERE TO PUT BACKGROUND
  const background = new Sprite({
     position: {
         x:0,
@@ -410,22 +203,9 @@ function animate() {
   
 
 //calls animation
-startBtn.addEventListener('click', function(){
-    if (!isAnimating) {
-        animate();
-      }
-      startBtn.style.display ='none';
-      winTimer();
-      gameEnd = false;
-      main.style.display = 'inline';
-      lossImg.style.display = 'none';
-      lives = 3;
-      lifeText.innerText = `Lives left: ${lives}`
-})
-
 //win function
 function winTimer(){
-    let timeLeft = 30;
+    let timeLeft = 3;
     const interval = setInterval(() => {
       timeLeft--;
       countdown.innerText = `${timeLeft} seconds left`;
@@ -436,12 +216,12 @@ function winTimer(){
         clearInterval(interval);
         gameEnd = true;
         lifeText.innerText = 'YOU WON LETS GOOOOO'
-        startBtn.style.display = 'inline';
+        nextlvlBtn.style.display = 'inline';
         lossImg.style.display = 'inline';
         player.position.x = 600;
         player.position.y = 300;
         isAnimating = false;
-        startBtn.innerText = 'Again?';
+        nextlvlBtn.innerText = 'Next level';
         main.style.display = 'none';
         countdown.innerText = `You survived!`;
 
@@ -450,37 +230,35 @@ function winTimer(){
 },1000)
 }
 
+const background2 = new Sprite({
+    position: {
+        x:0,
+        y:0,
+    },
+    imageSrc: './PandaMap2.png',
+ })
 
-//MOVEMENT
-window.addEventListener('keydown', (event) => {
-    switch (event.key){
-        case 'ArrowRight':
-            // console.log('moving right');
-            keys.arrowRight.pressed = true;
-        break
-        case 'ArrowLeft':
-            // console.log('moving left');
-            keys.arrowLeft.pressed = true;
-        break
-        case ' ':
-        if(grounded === true){
-        player.velocity.y = -15;
+//level 2 function
+
+function animate2() {
+    if (!isAnimating) {
+        isAnimating = true;
+    }
+
+    window.requestAnimationFrame(animate);
+    //FILLS WHOLE THING WHITE
+    c.fillStyle = 'white';
+    c.fillRect(0, 0, canvas.width, canvas.height);
+
+
+
+    main.style.display = 'inline';
+    background2.update();
+
+    if(!gameEnd){
+        player.update();
+        monster2.update();
+        monster1.update();
+        checkProjectileCollision();
         }
-        grounded = false;
 }
-      
-        
-    })
-
-    window.addEventListener('keyup', (event) => {
-        switch (event.key){
-            case 'ArrowRight':
-                // console.log('moving right');
-                keys.arrowRight.pressed = false;
-            break
-            case 'ArrowLeft':
-                // console.log('moving left');
-                keys.arrowLeft.pressed = false;
-            break
-            }
-        })
