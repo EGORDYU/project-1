@@ -17,9 +17,10 @@ let isAnimating = false;
 let gameEnd = false;
 let grounded = false;
 let lvl1Won = false;
+let lvl2Won = false;
 
 
-c.fillStyle = 'black';
+c.imageSrc = 'panda.png';
 c.fillRect(0,0,canvas.width,canvas.height);
 
 
@@ -27,7 +28,7 @@ c.fillRect(0,0,canvas.width,canvas.height);
 //PLAYER 1 FACE
 const pandaFace = new Image();
 pandaFace.onload = function() {
-    c.drawImage(pandaFace, 0, 0);
+    c.drawImage(pandaFace, 0, 0,canvas.width,canvas.height);
 }
 pandaFace.src = './panda.png';
 
@@ -163,7 +164,7 @@ function animate() {
     player.update();
     monster2.update();
     monster1.update();
-    checkProjectileCollision();
+    checkProjectileCollision(player);
     }
 
   
@@ -193,30 +194,43 @@ function animate() {
 
 //calls animation
 //win function
-function winTimer(){
-    let timeLeft = 3;
+function winTimer(level){
+    let timeLeft = 5;
     const interval = setInterval(() => {
       timeLeft--;
       countdown.innerText = `${timeLeft} seconds left`;
       if(lives === 0){
         clearInterval(interval);
         countdown.innerText = `You had ${timeLeft} seconds left`
-      }else if(timeLeft === 0) {
+      }else if(timeLeft === 0 && lvl1Won == false) {
         clearInterval(interval);
         gameEnd = true;
-        lifeText.innerText = 'YOU WON LETS GOOOOO'
+        lifeText.innerText = 'YOU BEAT LVL 1 LETS GOOOOO'
         nextlvlBtn.style.display = 'inline';
         lossImg.style.display = 'inline';
-        player.position.x = 600;
-        player.position.y = 300;
+        level.position.x = 600;
+        level.position.y = 300;
         isAnimating = true;
         lvl1Won = true;
-        nextlvlBtn.innerText = 'Next level';
         main.style.display = 'none';
         countdown.innerText = `You survived!`;
 
         
+      } else if (timeLeft === 0 && lvl1Won == true && lvl2Won == false){
+        clearInterval(interval);
+        gameEnd = true;
+        lifeText.innerText = 'YOU BEAT LVL 2 LETS GOOOOO'
+        level.position.x = 600;
+        level.position.y = 300;
+        isAnimating = true;
+        nextlvlBtn.innerText = 'Under Construction';
+        lvl2Won = true;
+        main.style.display = 'none';
+        countdown.innerText = `You survived!`;
+      } else if (lvl2Won == true) {
+        clearInterval(interval);
       }
+    
 },1000)
 }
 
@@ -251,7 +265,7 @@ function animate2() {
         player2.update();
         monster22.update();
         monster12.update();
-        checkProjectileCollision2();
+        checkProjectileCollision(player2);
         }
 
         player2.velocity.x = 0;

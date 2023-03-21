@@ -3,7 +3,7 @@ startBtn.addEventListener('click', function(){
         animate();
       }
       startBtn.style.display ='none';
-      winTimer();
+      winTimer(player);
       gameEnd = false;
       main.style.display = 'inline';
       lossImg.style.display = 'none';
@@ -54,10 +54,12 @@ window.addEventListener('keydown', (event) => {
 
 
       nextlvlBtn.addEventListener('click', function(){
+        lifeText.innerText = `Lives left:${lives}`;
         gameEnd = false;
         if (isAnimating) {
           animate2();
         }
+        winTimer(player2)
           
 
       })
