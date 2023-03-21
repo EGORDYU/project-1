@@ -89,6 +89,8 @@ class Projectile {
             lossImg.style.display = 'inline';
             startBtn.style.display = 'inline';
             startBtn.innerText = 'Try again';
+            player.position.x = 600;
+            player.position.y = 300;
             isAnimating = false;
             
 
@@ -97,6 +99,7 @@ class Projectile {
                 lifeText.innerText = `Lives left: ${lives}`
                 startBtn.style.display = 'none';
                 lossImg.style.display = 'none';
+
                 
                 if (!isAnimating) {
                     animate();
@@ -435,10 +438,13 @@ function winTimer(){
         lifeText.innerText = 'YOU WON LETS GOOOOO'
         startBtn.style.display = 'inline';
         lossImg.style.display = 'inline';
+        player.position.x = 600;
+        player.position.y = 300;
         isAnimating = false;
         startBtn.innerText = 'Again?';
         main.style.display = 'none';
         countdown.innerText = `You survived!`;
+
         
       }
 },1000)
