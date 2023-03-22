@@ -322,3 +322,86 @@ class Monster {
   
       }
   }
+
+
+  class Monsterlvl3 {
+    constructor({position, imageSrc, speed, distance}) {
+      this.position = position;
+      this.image = new Image();
+      this.image.src = imageSrc;
+      this.speed = speed;
+      this.distance = distance;
+      this.direction = 1;
+    }
+    //DRAWS IMAGE OF MONSTER
+    draw() {
+      if (!this.image) return;
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+    //INVOKES DRAW + PROJECTILS
+    update() {
+        this.draw();
+        // move the monster horizontally
+        this.position.x += this.speed.x * this.direction;
+        // check if the monster has moved the specified distance in either direction and change direction
+        if (this.position.x >= this.distance || this.position.x <= 0) {
+          this.direction *= -1;
+        }
+      
+        const minInterval = 1000; // 2 seconds
+        const maxInterval = 2000; // 4 seconds
+        const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
+
+        // create a projectile every 3-5 seconds with math.random
+        if (Date.now() % interval < 20) {
+          const angle = Math.atan2(player2.position.y - this.position.y, player2.position.x - this.position.x);
+          const projectile = new Projectile(this.position.x, this.position.y, angle);
+          projectiles.push(projectile);
+        }
+      
+        // updates projectile array for collision later
+      
+      }
+  }
+
+  class Monster2lvl3 {
+    constructor({position, imageSrc, speed, distance}) {
+      this.position = position;
+      this.image = new Image();
+      this.image.src = imageSrc;
+      this.speed = speed;
+      this.distance = distance;
+      this.direction = 1;
+    }
+    //DRAWS IMAGE OF MONSTER
+    draw() {
+      if (!this.image) return;
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+    //INVOKES DRAW + PROJECTILS
+    update() {
+        this.draw();
+        // move the monster horizontally
+        this.position.x += this.speed.x * this.direction;
+        // check if the monster has moved the specified distance in either direction and change direction
+        if (this.position.y >= this.distance || this.position.y <= 0) {
+          this.direction *= -1;
+        }
+      
+        const minInterval = 5000; // 2 seconds
+        const maxInterval = 10000; // 4 seconds
+        const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
+
+        // create a projectile every 3-5 seconds with math.random
+        if (Date.now() % interval < 20) {
+            const canvasCenterX = canvas.width / 2;
+            const canvasCenterY = this.position.y;
+            const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
+            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle);
+            projectiles.push(projectile);
+          }
+      
+        // updates projectile array for collision later
+  
+      }
+  }

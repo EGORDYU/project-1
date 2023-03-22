@@ -1,15 +1,3 @@
-startBtn.addEventListener('click', function(){
-    if (!isAnimating) {
-        animate();
-      }
-      startBtn.style.display ='none';
-      winTimer(player);
-      gameEnd = false;
-      main.style.display = 'inline';
-      lossImg.style.display = 'none';
-      lives = 3;
-      lifeText.innerText = `Lives left: ${lives}`
-})
 
 
 
@@ -53,8 +41,22 @@ window.addEventListener('keydown', (event) => {
       })
 
 
-      nextlvlBtn.addEventListener('click', function(){
-        nextlvlBtn.style.display = 'none';
+      startBtn.addEventListener('click', function(){
+        if (!isAnimating) {
+            animate();
+          }
+          startBtn.style.display ='none';
+          winTimer(player);
+          gameEnd = false;
+          main.style.display = 'inline';
+          lossImg.style.display = 'none';
+          lives = 3;
+          lifeText.innerText = `Lives left: ${lives}`
+    })
+    
+
+      nextlvlBtn2.addEventListener('click', function(){
+        nextlvlBtn2.style.display = 'none';
         lives = 3;
         lifeText.innerText = `Lives left:${lives}`;
         gameEnd = false;
@@ -62,6 +64,20 @@ window.addEventListener('keydown', (event) => {
           animate2();
         }
         winTimer(player2)
+          
+
+      })
+
+      nextlvlBtn3.addEventListener('click', function(){
+        nextlvlBtn3.style.display = 'none';
+        lives = 3;
+        lifeText.innerText = `Lives left:${lives}`;
+        console.log('clicking');
+        gameEnd = false;
+        if (isAnimating) {
+          animate3();
+        }
+        winTimer(player3)
           
 
       })

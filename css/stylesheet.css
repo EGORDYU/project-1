@@ -36,7 +36,13 @@ body{
 #instructions{
     margin:0;
 }
-#nextlvlBtn{
+#nextlvlBtn2{
+    display: none;
+    font-size: 30px;
+    background-color: green;
+}
+
+#nextlvlBtn3{
     display: none;
     font-size: 30px;
     background-color: green;
