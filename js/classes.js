@@ -6,8 +6,8 @@ class Player {
             x: 0,
             y: 1
         }
-        this.height = 50;
-        this.width = 50;
+        this.height = 40;
+        this.width = 40;
         this.collisionBlocks = collisionBlocks
         this.platformBlocks = platformBlocks
         
@@ -152,7 +152,7 @@ class Projectile {
       this.x = x;
       this.y = y;
       this.angle = angle;
-      this.speed = 5;
+      this.speed = 10;
     }
   
     draw() {
@@ -177,7 +177,7 @@ class Projectile2 {
       this.x = x;
       this.y = y;
       this.angle = angle;
-      this.speed = 1;
+      this.speed = 5;
     }
   
     draw() {
@@ -185,7 +185,7 @@ class Projectile2 {
       c.translate(this.x, this.y);
       c.rotate(this.angle);
       c.fillStyle = 'purple';
-      c.fillRect(0, 0, 40, 40);
+      c.fillRect(0, 0, 80, 80);
       c.restore();
     }
   
@@ -301,7 +301,7 @@ class Monster {
         // move the monster horizontally
         this.position.x += this.speed.x * this.direction;
         // check if the monster has moved the specified distance in either direction and change direction
-        if (this.position.x >= this.distance || this.position.x <= 0) {
+        if (this.position.y >= this.distance || this.position.y <= 0) {
           this.direction *= -1;
         }
       
@@ -312,7 +312,7 @@ class Monster {
         // create a projectile every 3-5 seconds with math.random
         if (Date.now() % interval < 20) {
             const canvasCenterX = canvas.width / 2;
-            const canvasCenterY = 660;
+            const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
             const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle);
             projectiles.push(projectile);
