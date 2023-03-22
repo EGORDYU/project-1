@@ -9,6 +9,7 @@ function checkProjectileCollision(player) {
         // decrease the lives and update the lifeText
         lives--;
         if(lives <= 0){
+            clearInterval();
             lifeText.innerText = "YOU LOST!"
             lossImg.style.display = 'inline';
             startBtn.style.display = 'inline';

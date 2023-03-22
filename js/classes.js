@@ -153,9 +153,9 @@ class Projectile {
       this.x = x;
       this.y = y;
       this.angle = angle;
-      this.speed = 10;
-      this.width = 20;
-      this.height = 20;
+      this.speed = 1;
+      this.width = width;
+      this.height = height;
     }
   
     draw() {
@@ -180,9 +180,9 @@ class Projectile2 {
       this.x = x;
       this.y = y;
       this.angle = angle;
-      this.speed = 5;
-      this.width = 80;
-      this.height = 80;
+      this.speed = 1;
+      this.width = width;
+      this.height = height;
     }
   
     draw() {
@@ -234,7 +234,7 @@ class Monster {
         // create a projectile every 3-5 seconds with math.random
         if (Date.now() % interval < 20) {
           const angle = Math.atan2(player.position.y - this.position.y, player.position.x - this.position.x);
-          const projectile = new Projectile(this.position.x, this.position.y, angle, this.width, this.height);
+          const projectile = new Projectile(this.position.x, this.position.y, angle, 20, 20);
           projectiles.push(projectile);
         }
       
@@ -275,7 +275,7 @@ class Monster {
         // create a projectile every 3-5 seconds with math.random
         if (Date.now() % interval < 20) {
           const angle = Math.atan2(player2.position.y - this.position.y, player2.position.x - this.position.x);
-          const projectile = new Projectile(this.position.x, this.position.y, angle);
+          const projectile = new Projectile(this.position.x, this.position.y, angle, 20, 20);
           projectiles.push(projectile);
         }
       
@@ -319,7 +319,7 @@ class Monster {
             const canvasCenterX = canvas.width / 2;
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
-            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle,this.width, this.height);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80);
             projectiles.push(projectile);
           }
       
@@ -360,7 +360,7 @@ class Monster {
         // create a projectile every 3-5 seconds with math.random
         if (Date.now() % interval < 20) {
           const angle = Math.atan2(player2.position.y - this.position.y, player2.position.x - this.position.x);
-          const projectile = new Projectile(this.position.x, this.position.y, angle);
+          const projectile = new Projectile(this.position.x, this.position.y, angle, 20, 20);
           projectiles.push(projectile);
         }
       
@@ -402,7 +402,7 @@ class Monster {
             const canvasCenterX = canvas.width / 2;
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
-            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80);
             projectiles.push(projectile);
           }
       
