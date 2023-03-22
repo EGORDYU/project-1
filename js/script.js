@@ -299,7 +299,7 @@ function winTimer(level){
       countdown.innerText = `${timeLeft} seconds left`;
       if(lives === 0){
         clearInterval(interval);
-        countdown.innerText = `You had ${timeLeft} seconds left`
+        countdown.innerText = `You had ${timeLeft+1} seconds left`
         lossImg.style.display = 'inline';
         nextlvlBtn2.style.display = 'none';
       }else if(timeLeft === 0 && lvl1Won == false) {

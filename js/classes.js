@@ -39,6 +39,7 @@ class Player {
         this.applyGravity();
         this.checkForVerticalCollisions()
         
+        
         //increases speed
        
         
@@ -153,8 +154,8 @@ class Projectile {
       this.y = y;
       this.angle = angle;
       this.speed = 10;
-      this.width = width;
-      this.height = height;
+      this.width = 20;
+      this.height = 20;
     }
   
     draw() {
@@ -180,8 +181,8 @@ class Projectile2 {
       this.y = y;
       this.angle = angle;
       this.speed = 5;
-      this.width = width;
-      this.height = height;
+      this.width = 80;
+      this.height = 80;
     }
   
     draw() {
@@ -233,7 +234,7 @@ class Monster {
         // create a projectile every 3-5 seconds with math.random
         if (Date.now() % interval < 20) {
           const angle = Math.atan2(player.position.y - this.position.y, player.position.x - this.position.x);
-          const projectile = new Projectile(this.position.x, this.position.y, angle);
+          const projectile = new Projectile(this.position.x, this.position.y, angle, this.width, this.height);
           projectiles.push(projectile);
         }
       
@@ -318,7 +319,7 @@ class Monster {
             const canvasCenterX = canvas.width / 2;
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
-            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle);
+            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle,this.width, this.height);
             projectiles.push(projectile);
           }
       
