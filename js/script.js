@@ -88,12 +88,21 @@ const player2 = new Player({
     distance: 1200,
   });
 
-//   const monster3 = new Monster({
-//     position: {x:50, y: 700},
-//     imageSrc: './mutalisk.png',
-//     speed: {x: 0, y: 0},
-//     distance: 0,
-//   })
+
+  const monster122 = new Monster2lvl2({
+    position: { x: 1250, y: 640 },
+    imageSrc: './monster2.png',
+    speed: { x: 0, y: 0 },
+    distance: 0
+  });
+
+  const monster222 = new Monster2lvl2({
+    position: { x: -25, y: 640 },
+    imageSrc: './monster2.png',
+    speed: { x: 0, y: 0 },
+    distance: 0,
+  });
+
   
 
 //refactored function to make easier
@@ -209,8 +218,9 @@ function animate2() {
     }
 
     isAnimating = false;
-
+    if(!lvl2Won){
     window.requestAnimationFrame(animate2);
+    }
     //FILLS WHOLE THING WHITE
     c.fillStyle = 'rgb(255,0,0,0)';
     c.fillRect(0, 0, canvas.width, canvas.height);
@@ -224,6 +234,8 @@ function animate2() {
         player2.update();
         monster22.update();
         monster12.update();
+        monster122.update();
+        monster222.update();
         checkProjectileCollision(player2);
         }
         
@@ -252,7 +264,7 @@ function animate2() {
 //calls animation
 //win function
 function winTimer(level){
-    let timeLeft = 30;
+    let timeLeft = 10;
     const interval = setInterval(() => {
       timeLeft--;
       countdown.innerText = `${timeLeft} seconds left`;

@@ -170,7 +170,31 @@ class Projectile {
       this.y += this.speed * Math.sin(this.angle);
     }
   }
-
+  
+//PROJECTILE CLASS
+class Projectile2 {
+    constructor(x, y, angle) {
+      this.x = x;
+      this.y = y;
+      this.angle = angle;
+      this.speed = 1;
+    }
+  
+    draw() {
+      c.save();
+      c.translate(this.x, this.y);
+      c.rotate(this.angle);
+      c.fillStyle = 'purple';
+      c.fillRect(0, 0, 40, 40);
+      c.restore();
+    }
+  
+    update() {
+      this.draw();
+      this.x += this.speed * Math.cos(this.angle);
+      this.y += this.speed * Math.sin(this.angle);
+    }
+  }
 
 
   //CLASS FOR MONSTER
@@ -260,3 +284,47 @@ class Monster {
   }
 
   
+
+  class Monster2lvl2 {
+    constructor({position, imageSrc, speed, distance}) {
+      this.position = position;
+      this.image = new Image();
+      this.image.src = imageSrc;
+      this.speed = speed;
+      this.distance = distance;
+      this.direction = 1;
+    }
+    //DRAWS IMAGE OF MONSTER
+    draw() {
+      if (!this.image) return;
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+    //INVOKES DRAW + PROJECTILS
+    update() {
+        this.draw();
+        // move the monster horizontally
+        this.position.x += this.speed.x * this.direction;
+        // check if the monster has moved the specified distance in either direction and change direction
+        if (this.position.x >= this.distance || this.position.x <= 0) {
+          this.direction *= -1;
+        }
+      
+        const minInterval = 5000; // 2 seconds
+        const maxInterval = 10000; // 4 seconds
+        const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
+
+        // create a projectile every 3-5 seconds with math.random
+        if (Date.now() % interval < 20) {
+            const canvasCenterX = canvas.width / 2;
+            const canvasCenterY = 660;
+            const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
+            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle);
+            projectiles.push(projectile);
+          }
+      
+        // updates projectile array for collision later
+        for (let i = 0; i < projectiles.length; i++) {
+          projectiles[i].update();
+        }
+      }
+  }
