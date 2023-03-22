@@ -59,6 +59,7 @@ window.addEventListener('keydown', (event) => {
     
 
       nextlvlBtn2.addEventListener('click', function(){
+        main.style.display = 'inline';
         nextlvlBtn2.style.display = 'none';
         lives = 3;
         lifeText.innerText = `Lives left:${lives}`;
@@ -72,6 +73,7 @@ window.addEventListener('keydown', (event) => {
       })
 
       nextlvlBtn3.addEventListener('click', function(){
+        main.style.display = 'inline';
         nextlvlBtn3.style.display = 'none';
         lives = 3;
         lifeText.innerText = `Lives left:${lives}`;

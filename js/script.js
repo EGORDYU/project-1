@@ -171,8 +171,16 @@ function animate2() {
     c.fillRect(0, 0, canvas.width, canvas.height);
 
 
-    main.style.display = 'inline';
+ 
     background2.update();
+
+    collisionBlocks.forEach(collisionBlock => {
+        collisionBlock.update();
+    })
+
+    platformBlocks.forEach(platformBlock => {
+        platformBlock.update();
+    })
 
     if(!gameEnd){
         player2.update();
@@ -231,8 +239,17 @@ const background3 = new Sprite({
  
 
 
-    main.style.display = 'inline';
+    collisionBlocks.forEach(collisionBlock => {
+        collisionBlock.update();
+    })
+
+    platformBlocks.forEach(platformBlock => {
+        platformBlock.update();
+    })
+
     background3.update();
+
+
     console.log("game end is" + gameEnd);
     if(!gameEnd){
         player3.update();
@@ -315,11 +332,15 @@ function winTimer(level){
       } else if (timeLeft === 0 && lvl2Won == true && lives >0) {
         //winning lvl 3
         clearInterval(interval);
-        
+        lifeText.innerText = 'You beat the game!!!'
+        lvl3Won = true;
+        gameEnd=true;
+        isAnimating=true
         level.position.x = 600;
         level.position.y = 300;
-        main.style.display = 'inline';
-        nextlvlBtn3.style.display = 'inline';
+        main.style.display = 'none';
+        nextlvlBtn3.style.display = 'none';
+        countdown.innerText = `You survived!`;
       }
     
 },1000)
