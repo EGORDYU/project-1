@@ -72,3 +72,27 @@ platformCollisions2D3.forEach((row, y) =>{
 
 
 })
+
+floorCollisions3 = [0,0,0,0,0];
+
+const floorCollisions2D3 = []
+    for (let i=0; i<floorCollisions3.length; i +=86){
+        floorCollisions2D3.push(floorCollisions3.slice(i,i + 86))
+    }
+
+    let collisionBlocks3 = [];
+    floorCollisions2D3.forEach((row, y) =>{
+        row.forEach((symbol, x) =>{
+            if(symbol === 841){
+                console.log('draw a block')
+                collisionBlocks3.push(
+                    new CollisionBlock({
+                    position:{
+                    x: x * 16,
+                    y: y * 16,
+                },
+            })
+            )
+            }
+    })
+})

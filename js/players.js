@@ -23,5 +23,6 @@ const player3 = new Player({
     y: 300,
     },
 
+    collisionBlocks: collisionBlocks3,
     platformBlocks: platformBlocks3
 });

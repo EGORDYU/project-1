@@ -18,6 +18,9 @@ window.addEventListener('keydown', (event) => {
       if(lvl1Won === true){
       player2.velocity.y = -15;
       }
+      if(lvl2Won === true){
+        player3.velocity.y = -15;
+        }
       }
       grounded = false;
       break
@@ -76,6 +79,7 @@ window.addEventListener('keydown', (event) => {
         gameEnd = false;
         if (isAnimating) {
           animate3();
+          console.log(gameEnd);
         }
         winTimer(player3)
           
