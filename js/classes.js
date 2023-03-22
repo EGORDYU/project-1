@@ -148,16 +148,18 @@ class Sprite {
 
 //PROJECTILE CLASS
 class Projectile {
-    constructor(x, y, angle) {
+    constructor(x, y, angle,width,height) {
       this.x = x;
       this.y = y;
       this.angle = angle;
       this.speed = 10;
+      this.width = width;
+      this.height = height;
     }
   
     draw() {
       c.save();
-      c.translate(this.x, this.y);
+      c.translate(this.x, this.y, this.width, this.height);
       c.rotate(this.angle);
       c.fillStyle = 'red';
       c.fillRect(0, 0, 20, 20);
@@ -173,16 +175,18 @@ class Projectile {
   
 //PROJECTILE CLASS
 class Projectile2 {
-    constructor(x, y, angle) {
+    constructor(x, y, angle, width, height) {
       this.x = x;
       this.y = y;
       this.angle = angle;
       this.speed = 5;
+      this.width = width;
+      this.height = height;
     }
   
     draw() {
       c.save();
-      c.translate(this.x, this.y);
+      c.translate(this.x, this.y, this.width, this.height);
       c.rotate(this.angle);
       c.fillStyle = 'purple';
       c.fillRect(0, 0, 80, 80);
