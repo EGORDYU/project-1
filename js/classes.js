@@ -234,9 +234,7 @@ class Monster {
         }
       
         // updates projectile array for collision later
-        for (let i = 0; i < projectiles.length; i++) {
-          projectiles[i].update();
-        }
+        
       }
   }
 
@@ -277,9 +275,7 @@ class Monster {
         }
       
         // updates projectile array for collision later
-        for (let i = 0; i < projectiles.length; i++) {
-          projectiles[i].update();
-        }
+      
       }
   }
 
@@ -323,8 +319,6 @@ class Monster {
           }
       
         // updates projectile array for collision later
-        for (let i = 0; i < projectiles.length; i++) {
-          projectiles[i].update();
-        }
+  
       }
   }

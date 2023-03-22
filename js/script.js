@@ -174,6 +174,9 @@ function animate() {
     monster2.update();
     monster1.update();
     checkProjectileCollision(player);
+    for (let i = 0; i < projectiles.length; i++) {
+        projectiles[i].update();
+      }
     }
 
   
@@ -237,6 +240,9 @@ function animate2() {
         monster122.update();
         monster222.update();
         checkProjectileCollision(player2);
+        for (let i = 0; i < projectiles.length; i++) {
+            projectiles[i].update();
+          }
         }
         
         player2.velocity.x = 0;
