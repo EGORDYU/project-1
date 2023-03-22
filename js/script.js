@@ -162,7 +162,7 @@ function animate2() {
         isAnimating = true;
     }
 
-    isAnimating = false;
+
     if(!lvl2Won){
     window.requestAnimationFrame(animate2);
     }
@@ -222,7 +222,7 @@ const background3 = new Sprite({
         isAnimating = true;
     }
 
-    isAnimating = false;
+
     if(!lvl3Won){
     window.requestAnimationFrame(animate3);
     }
