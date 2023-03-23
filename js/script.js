@@ -350,7 +350,7 @@ function winTimer(level){
 }
 
 function loss(btn, anim){
-if(lives <= 0){
+if(lives == 0){
   clearInterval();
   lifeText.innerText = "YOU LOST!"
   lossImg.style.display = 'inline';
@@ -359,6 +359,7 @@ if(lives <= 0){
   player.position.x = 600;
   player.position.y = 300;
   isAnimating = false;
+  gameEnd = true;
   
 
   btn.addEventListener('click', function(){
@@ -367,6 +368,7 @@ if(lives <= 0){
       btn.style.display = 'none';
       lossImg.style.display = 'none';
       isAnimating = true;
+      gameEnd = false;
 
       
       if (!isAnimating) {
