@@ -141,18 +141,15 @@ function animate() {
     }
 }
     // clear projectiles that are out of bounds
-    for (let i = 0; i < projectiles.length; i++) {
-      const projectile = projectiles[i];
-      if (projectile.x < 0 || projectile.x > canvas.width || projectile.y < 0 || projectile.y > canvas.height) {
-        projectiles.splice(i, 1);
-        i--;
+    
+        
       }
-    }
+    
     if(lives <= 0){
         main.style.display = 'none';
     }
     
-    }
+    
   
 
 

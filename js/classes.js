@@ -178,12 +178,12 @@ class Projectile {
 class Projectile2 {
     constructor(x, y, angle, width, height, side) {
       this.x = side === 'left' ? x + 26 : x;
-      this.y = side === 'right' ? y + 90 : y;
+      this.y =  y;
       this.angle = angle;
       this.speed = 3;
       this.width = width;
       this.height = height;
-      this.collisionRadius = 5; // adjust to match visual size
+ // adjust to match visual size
     }
   
     draw() {
@@ -200,6 +200,7 @@ class Projectile2 {
       this.x += this.speed * Math.cos(this.angle);
       this.y += this.speed * Math.sin(this.angle);
     }
+    
   }
 
 
@@ -316,8 +317,8 @@ class Monster {
           this.direction *= -1;
         }
       
-        const minInterval = 5000; // 2 seconds
-        const maxInterval = 10000; // 4 seconds
+        const minInterval = 1000; // 2 seconds
+        const maxInterval = 2000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
         // create a projectile every 3-5 seconds with math.random
@@ -400,8 +401,8 @@ class Monster {
           this.direction *= -1;
         }
       
-        const minInterval = 5000; // 2 seconds
-        const maxInterval = 10000; // 4 seconds
+        const minInterval = 1000; // 2 seconds
+        const maxInterval = 2000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
         // create a projectile every 3-5 seconds with math.random
