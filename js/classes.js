@@ -177,13 +177,13 @@ class Projectile {
 //PROJECTILE CLASS
 class Projectile2 {
     constructor(x, y, angle, width, height, side) {
-      this.x = side === 'left' ? x + 26 : x - 26;
-      this.y = y;
+      this.x = side === 'left' ? x + 26 : x;
+      this.y = side === 'right' ? y + 90 : y;
       this.angle = angle;
       this.speed = 3;
       this.width = width;
       this.height = height;
-      this.collisionRadius = 15; // adjust to match visual size
+      this.collisionRadius = 5; // adjust to match visual size
     }
   
     draw() {
@@ -326,7 +326,7 @@ class Monster {
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
             const side = this.position.x < canvasCenterX ? 'left' : 'right'; // determine which side the monster is on
-            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80, side);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 90, 90, side);
             projectiles.push(projectile);
           }
       
@@ -410,7 +410,7 @@ class Monster {
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
             const side = this.position.x < canvasCenterX ? 'left' : 'right'; // determine which side the monster is on
-            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80, side);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 90, 90, side);
             projectiles.push(projectile);
           }
       
