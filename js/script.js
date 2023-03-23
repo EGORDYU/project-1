@@ -7,6 +7,7 @@ let countdown = document.querySelector('#countdown');
 let lvlBtn1 = document.querySelector('#lvlBtn1')
 let nextlvlBtn2 = document.querySelector('#nextlvlBtn2');
 let nextlvlBtn3 = document.querySelector('#nextlvlBtn3');
+let winImg = document.querySelector('#winImg');
 //c = context
 const c = canvas.getContext('2d');
 // console.log(c);
@@ -118,7 +119,7 @@ function animate() {
     platformBlocks.forEach(platformBlock => {
         platformBlock.update();
     })
-    loss(lvlBtn1,animate);
+    loss(lvlBtn1,animate,player);
     if(!gameEnd){
     player.update();
     monster2.update();
@@ -189,7 +190,7 @@ function animate2() {
     platformBlocks.forEach(platformBlock => {
         platformBlock.update();
     })
-    loss(nextlvlBtn2,animate2);
+    loss(nextlvlBtn2,animate2,player2);
     if(!gameEnd){
         player2.update();
         monster22.update();
@@ -256,7 +257,7 @@ const background3 = new Sprite({
     })
 
     background3.update();
-    loss(nextlvlBtn3,animate3);
+    loss(nextlvlBtn3,animate3,player3);
 
     console.log("game end is" + gameEnd);
     if(!gameEnd){
@@ -314,6 +315,8 @@ function winTimer(level){
         //winning lvl1
         clearInterval(interval);
         gameEnd = true;
+        winImg.style.display = 'inline';
+        winImg.src = "./level1won.jpg"
         lifeText.innerText = 'YOU BEAT LVL 1 LETS GOOOOO'
         nextlvlBtn2.style.display = 'inline';
         level.position.x = 600;
@@ -356,7 +359,7 @@ function winTimer(level){
 },1000)
 }
 
-function loss(btn, anim){
+function loss(btn, anim,player){
 if(lives == 0){
   clearInterval();
   lifeText.innerText = "YOU LOST!"

@@ -30,14 +30,14 @@ const monster1 = new Monster({
 
 
   const monster122 = new Monster2lvl2({
-    position: { x: 1250, y: 640 },
+    position: { x: 1250, y: 670 },
     imageSrc: './monster2.png',
     speed: { x: 0, y: 0 },
     distance: 0
   });
 
   const monster222 = new Monster2lvl2({
-    position: { x: -25, y: 640 },
+    position: { x: -25, y: 670 },
     imageSrc: './monster2.png',
     speed: { x: 0, y: 0 },
     distance: 0,
@@ -63,13 +63,13 @@ const monster1 = new Monster({
       const monster123 = new Monster2lvl3({
         position: { x: 1250, y: 640 },
         imageSrc: './monster2.png',
-        speed: { x: 0, y: 0 },
-        distance: 0
+        speed: { x: 0, y: -5 },
+        distance: 700
       });
     
       const monster223 = new Monster2lvl3({
         position: { x: -25, y: 640 },
         imageSrc: './monster2.png',
-        speed: { x: 0, y: 0 },
-        distance: 0,
+        speed: { x: 0, y: -5 },
+        distance: 700,
       });

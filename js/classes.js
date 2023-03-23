@@ -394,7 +394,7 @@ class Monster {
     update() {
         this.draw();
         // move the monster horizontally
-        this.position.x += this.speed.x * this.direction;
+        this.position.y += this.speed.y * this.direction;
         // check if the monster has moved the specified distance in either direction and change direction
         if (this.position.y >= this.distance || this.position.y <= 0) {
           this.direction *= -1;

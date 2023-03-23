@@ -58,4 +58,8 @@ body{
     font-size: 30px;
     background-color: green;
 }
- 
+ #winImg{
+    display: none;
+    height: 700px;
+    width: 1000px;
+ }

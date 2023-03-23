@@ -83,6 +83,7 @@ window.addEventListener('keydown', (event) => {
         lives = 3;
         lifeText.innerText = `Lives left:${lives}`;
         gameEnd = false;
+        winImg.style.display = 'none';
         if (isAnimating) {
           animate2();
         }
