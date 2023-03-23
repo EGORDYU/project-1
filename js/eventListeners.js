@@ -54,6 +54,7 @@ window.addEventListener('keydown', (event) => {
           gameEnd = false;
           main.style.display = 'inline';
           lossImg.style.display = 'none';
+          winImg.style.display = 'none';
           lives = 3;
           lifeText.innerText = `Lives left: ${lives}`
           
@@ -66,6 +67,7 @@ window.addEventListener('keydown', (event) => {
         gameEnd = false;
         main.style.display = 'inline';
         lossImg.style.display = 'none';
+        winImg.style.display = 'none';
         lives = 3;
         lifeText.innerText = `Lives left: ${lives}`
         if (isAnimating) {
@@ -98,6 +100,7 @@ window.addEventListener('keydown', (event) => {
         nextlvlBtn3.style.display = 'none';
         lives = 3;
         lifeText.innerText = `Lives left:${lives}`;
+        winImg.style.display = 'none';
         console.log('clicking');
         gameEnd = false;
         if (isAnimating) {

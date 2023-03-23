@@ -331,6 +331,8 @@ function winTimer(level){
         nextlvlBtn3.style.display = 'none';
         clearInterval(interval);
         gameEnd = true;
+        winImg.style.display = 'inline';
+        winImg.src = "./level2Won.jpg"
         lifeText.innerText = 'YOU BEAT LVL 2 LETS GOOOOO'
         level.position.x = 600;
         level.position.y = 300;
@@ -344,6 +346,8 @@ function winTimer(level){
         //winning lvl 3
         clearInterval(interval);
         lifeText.innerText = 'You beat the game!!!'
+        winImg.style.display = 'inline';
+        winImg.src = "./level3Won.jpg"
         lvl3Won = true;
         gameEnd=true;
         isAnimating=true

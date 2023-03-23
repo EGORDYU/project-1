@@ -63,3 +63,8 @@ body{
     height: 700px;
     width: 1000px;
  }
+
+ button{
+    padding: 10px;
+    margin: 5px;
+ }
