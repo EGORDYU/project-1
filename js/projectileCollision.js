@@ -27,6 +27,6 @@ console.log('canvas.height:' + canvas.height)
         if (player.position.y + player.height + 2 >= canvas.height) {
             
             // the player has hit the bottom of the canvas, decrement lives by 3
-            lives -= 3;
+            lives = 0;
         }
     }

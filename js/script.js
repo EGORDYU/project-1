@@ -24,24 +24,21 @@ let lvl2Won = false;
 let lvl3Won = false;
 
 
-c.imageSrc = 'panda.png';
-c.fillRect(0,0,canvas.width,canvas.height);
-
-
-
-//PLAYER 1 FACE
-const pandaFace = new Image();
-pandaFace.onload = function() {
-    c.drawImage(pandaFace, 0, 0,canvas.width,canvas.height);
-}
-pandaFace.src = './panda.png';
 
 
 const startScreenImg = new Image();
 startScreenImg.onload = function() {
     c.drawImage(startScreenImg, 0, 0, canvas.width, canvas.height);
 }
-startScreenImg.src = './pandascreen.png';
+startScreenImg.src = './images/pandascreen.png';
+
+//PLAYER 1 FACE
+const pandaFace = new Image();
+    c.drawImage(pandaFace, 0, 0,canvas.width,canvas.height);
+pandaFace.src = './images/panda.png';
+
+
+
 
 
 //ARRAY TO KEEP TRACK OF PROJECTILES
@@ -90,7 +87,7 @@ function collision({
         x:0,
         y:0,
     },
-    imageSrc: './PandaMap.png',
+    imageSrc: './images/PandaMap.png',
  })
 
  
@@ -130,7 +127,13 @@ function animate() {
       }
     }
 
-  
+    if(lives == 1){
+        pandaFace.src = './images/1lifepanda.png';
+    }
+    if(lives == 3){
+        pandaFace.src = './images/panda.png'
+    }
+
     if(!lvl1Won){
     player.velocity.x = 0;
     if (keys.arrowRight.pressed) {
@@ -161,7 +164,7 @@ const background2 = new Sprite({
         x:0,
         y:0,
     },
-    imageSrc:'./PandaMap2.png',
+    imageSrc:'./images/PandaMap2.png',
  })
 
 //level 2 function
@@ -170,6 +173,9 @@ function animate2() {
     if (!isAnimating) {
         isAnimating = true;
     }
+
+
+
 
 
     if(!lvl2Won){
@@ -202,7 +208,12 @@ function animate2() {
             projectiles[i].update();
           }
         }
-        
+        if(lives == 1){
+            pandaFace.src = './images/1lifepanda.png';
+        }
+        if(lives == 3){
+            pandaFace.src = './images/panda.png'
+        }
         player2.velocity.x = 0;
         if (keys.arrowRight.pressed) {
             // console.log('pressed');
@@ -229,7 +240,7 @@ const background3 = new Sprite({
         x:0,
         y:0,
     },
-    imageSrc:'./PandaMap3.png',
+    imageSrc:'./images/PandaMap3.png',
  })
 
 
@@ -259,6 +270,12 @@ const background3 = new Sprite({
     background3.update();
     loss(nextlvlBtn3,animate3,player3);
 
+    if(lives == 1){
+        pandaFace.src = './images/1lifepanda.png';
+    }
+    if(lives == 3){
+        pandaFace.src = './images/panda.png'
+    }
     console.log("game end is" + gameEnd);
     if(!gameEnd){
         player3.update();
@@ -303,7 +320,7 @@ const background3 = new Sprite({
 //calls animation
 //win function
 function winTimer(level){
-    let timeLeft = 10;
+    let timeLeft = 30;
     const interval = setInterval(() => {
       timeLeft--;
       countdown.innerText = `${timeLeft} seconds left`;
@@ -317,7 +334,7 @@ function winTimer(level){
         clearInterval(interval);
         gameEnd = true;
         winImg.style.display = 'inline';
-        winImg.src = "./level1won.jpg"
+        winImg.src = "./images/level1won.jpg"
         lifeText.innerText = 'YOU BEAT LVL 1 LETS GOOOOO'
         nextlvlBtn2.style.display = 'inline';
         level.position.x = 600;
@@ -333,7 +350,7 @@ function winTimer(level){
         clearInterval(interval);
         gameEnd = true;
         winImg.style.display = 'inline';
-        winImg.src = "./level2Won.jpg"
+        winImg.src = "./images/level2Won.jpg"
         lifeText.innerText = 'YOU BEAT LVL 2 LETS GOOOOO'
         level.position.x = 600;
         level.position.y = 300;
@@ -348,7 +365,7 @@ function winTimer(level){
         clearInterval(interval);
         lifeText.innerText = 'You beat the game!!!'
         winImg.style.display = 'inline';
-        winImg.src = "./level3Won.jpg"
+        winImg.src = "./images/level3Won.jpg"
         lvl3Won = true;
         gameEnd=true;
         isAnimating=true

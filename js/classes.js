@@ -163,7 +163,7 @@ class Projectile {
         c.translate(this.x, this.y);
         // c.rotate(this.angle);
         const img = new Image();
-        img.src = './projectile1.png'; // replace with the path to your image file
+        img.src = './images/projectile1.png'; // replace with the path to your image file
         c.drawImage(img, 0, 0, this.width, this.height);
         c.restore();
       }
@@ -192,7 +192,7 @@ class Projectile2 {
         c.translate(this.x, this.y);
         // c.rotate(this.angle);
         const img = new Image();
-        img.src = './projectile.png'; // replace with the path to your image file
+        img.src = './images/projectile.png'; // replace with the path to your image file
         c.drawImage(img, 0, 0, this.width, this.height);
         c.restore();
       }
@@ -218,8 +218,19 @@ class Monster {
     }
     //DRAWS IMAGE OF MONSTER
     draw() {
-      if (!this.image) return;
-      c.drawImage(this.image, this.position.x, this.position.y);
+        if (!this.image) return;
+        
+        if (this.direction === 1) {
+            // monster is facing right, draw image normally
+            c.drawImage(this.image, this.position.x, this.position.y);
+        } else {
+            // monster is facing left, flip image horizontally before drawing
+            c.save();
+            c.translate(this.position.x + this.image.width, this.position.y);
+            c.scale(-1, 1);
+            c.drawImage(this.image, 0, 0);
+            c.restore();
+        }
     }
     //INVOKES DRAW + PROJECTILS
     update() {
@@ -228,8 +239,9 @@ class Monster {
         this.position.x += this.speed.x * this.direction;
         // check if the monster has moved the specified distance in either direction and change direction
         if (this.position.x >= this.distance || this.position.x <= 0) {
-          this.direction *= -1;
-        }
+            this.direction *= -1;
+            this.imageScale *= -1; // flip the image when changing direction
+          }
       
         const minInterval = 1000; // 2 seconds
         const maxInterval = 2000; // 4 seconds

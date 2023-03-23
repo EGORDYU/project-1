@@ -3,7 +3,7 @@
 }
 
 body{
-    background-color: wheat;
+    background-color: lightgreen;
 }
 
 .livesLeft{
@@ -13,7 +13,11 @@ body{
     justify-content: center; /* center child horizontally */
     align-items: center; /* center child vertically */
     height: 100%; /* set height to fill parent container */
+    
+    background-color: white;
+
 }
+
 #lifeText{
     color: green;
     margin:0;
@@ -40,6 +44,7 @@ body{
 }
 #instructions{
     margin:0;
+    padding-top: 0;
 }
 #nextlvlBtn2{
     display: none;
@@ -66,5 +71,5 @@ body{
 
  button{
     padding: 10px;
-    margin: 5px;
+    margin: 0px;
  }
