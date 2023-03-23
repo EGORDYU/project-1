@@ -159,13 +159,14 @@ class Projectile {
     }
   
     draw() {
-      c.save();
-      c.translate(this.x, this.y, this.width, this.height);
-      c.rotate(this.angle);
-      c.fillStyle = 'red';
-      c.fillRect(0, 0, this.width, this.height);
-      c.restore();
-    }
+        c.save();
+        c.translate(this.x, this.y);
+        // c.rotate(this.angle);
+        const img = new Image();
+        img.src = './projectile1.png'; // replace with the path to your image file
+        c.drawImage(img, 0, 0, this.width, this.height);
+        c.restore();
+      }
   
     update() {
       this.draw();
@@ -178,7 +179,7 @@ class Projectile {
 class Projectile2 {
     constructor(x, y, angle, width, height, side) {
       this.x = side === 'left' ? x + 26 : x;
-      this.y =  y;
+      this.y =  y-15;
       this.angle = angle;
       this.speed = 3;
       this.width = width;
@@ -187,13 +188,14 @@ class Projectile2 {
     }
   
     draw() {
-      c.save();
-      c.translate(this.x, this.y);
-    //   c.rotate(this.angle);
-      c.fillStyle = 'purple';
-      c.fillRect(0, 0, this.width, this.height);
-      c.restore();
-    }
+        c.save();
+        c.translate(this.x, this.y);
+        // c.rotate(this.angle);
+        const img = new Image();
+        img.src = './projectile.png'; // replace with the path to your image file
+        c.drawImage(img, 0, 0, this.width, this.height);
+        c.restore();
+      }
   
     update() {
       this.draw();
@@ -317,8 +319,8 @@ class Monster {
           this.direction *= -1;
         }
       
-        const minInterval = 1000; // 2 seconds
-        const maxInterval = 2000; // 4 seconds
+        const minInterval = 3000; // 2 seconds
+        const maxInterval = 6000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
         // create a projectile every 3-5 seconds with math.random
@@ -401,8 +403,8 @@ class Monster {
           this.direction *= -1;
         }
       
-        const minInterval = 1000; // 2 seconds
-        const maxInterval = 2000; // 4 seconds
+        const minInterval = 2000; // 2 seconds
+        const maxInterval = 5000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
 
         // create a projectile every 3-5 seconds with math.random
