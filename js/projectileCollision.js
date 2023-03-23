@@ -12,8 +12,21 @@ function checkProjectileCollision(player) {
         // remove the projectile from the projectiles array
         projectiles.splice(i, 1);
         i--;
-      }
+        
     }
   }
 
-  
+}
+
+
+
+function falling(player){
+console.log('player position:' + player.position.y);
+console.log('player height:' + player.height + 2)
+console.log('canvas.height:' + canvas.height)
+        if (player.position.y + player.height + 2 >= canvas.height) {
+            
+            // the player has hit the bottom of the canvas, decrement lives by 3
+            lives -= 3;
+        }
+    }

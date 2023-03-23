@@ -267,6 +267,7 @@ const background3 = new Sprite({
         monster123.update();
         monster223.update();
         checkProjectileCollision(player3);
+        falling(player3)
         for (let i = 0; i < projectiles.length; i++) {
             projectiles[i].update();
           }
