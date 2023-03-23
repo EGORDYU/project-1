@@ -183,6 +183,12 @@ class Projectile2 {
       this.speed = 3;
       this.width = width;
       this.height = height;
+      this.hitbox = {
+        x: x - width / 2,
+        y: y - height / 2,
+        width: width,
+        height: height,
+      };
     }
   
     draw() {
@@ -267,7 +273,11 @@ class Monster {
         if (this.position.x >= this.distance || this.position.x <= 0) {
           this.direction *= -1;
         }
-      
+        
+        const canvasCenterX = 0; // set to 0 for left side of canvas
+         const canvasCenterY = this.position.y;
+        const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
+        
         const minInterval = 1000; // 2 seconds
         const maxInterval = 2000; // 4 seconds
         const interval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
@@ -279,6 +289,7 @@ class Monster {
           projectiles.push(projectile);
         }
       
+        
         // updates projectile array for collision later
       
       }
@@ -319,7 +330,7 @@ class Monster {
             const canvasCenterX = canvas.width / 2;
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
-            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle, 80, 80);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80);
             projectiles.push(projectile);
           }
       
@@ -402,7 +413,7 @@ class Monster {
             const canvasCenterX = canvas.width / 2;
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
-            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle, 80, 80);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80);
             projectiles.push(projectile);
           }
       
