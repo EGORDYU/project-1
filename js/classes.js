@@ -153,7 +153,7 @@ class Projectile {
       this.x = x;
       this.y = y;
       this.angle = angle;
-      this.speed = 1;
+      this.speed = 5;
       this.width = width;
       this.height = height;
     }
@@ -163,7 +163,7 @@ class Projectile {
       c.translate(this.x, this.y, this.width, this.height);
       c.rotate(this.angle);
       c.fillStyle = 'red';
-      c.fillRect(0, 0, 20, 20);
+      c.fillRect(0, 0, this.width, this.height);
       c.restore();
     }
   
@@ -180,17 +180,17 @@ class Projectile2 {
       this.x = x;
       this.y = y;
       this.angle = angle;
-      this.speed = 1;
+      this.speed = 3;
       this.width = width;
       this.height = height;
     }
   
     draw() {
       c.save();
-      c.translate(this.x, this.y, this.width, this.height);
+      c.translate(this.x, this.y);
       c.rotate(this.angle);
       c.fillStyle = 'purple';
-      c.fillRect(0, 0, 80, 80);
+      c.fillRect(0, 0, this.width, this.height);
       c.restore();
     }
   
@@ -319,7 +319,7 @@ class Monster {
             const canvasCenterX = canvas.width / 2;
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
-            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80);
+            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle, 80, 80);
             projectiles.push(projectile);
           }
       
@@ -402,7 +402,7 @@ class Monster {
             const canvasCenterX = canvas.width / 2;
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
-            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80);
+            const projectile = new Projectile2(this.position.x+26, this.position.y+26, angle, 80, 80);
             projectiles.push(projectile);
           }
       

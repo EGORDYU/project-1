@@ -36,7 +36,7 @@ pandaFace.src = './panda.png';
 
 
 //ARRAY TO KEEP TRACK OF PROJECTILES
-  const projectiles = [];
+  let projectiles = [];
   let lives = 3;
 
 
@@ -329,7 +329,7 @@ function winTimer(level){
         isAnimating = true;
         main.style.display = 'none';
         countdown.innerText = `You survived!`;
-      } else if (timeLeft === 0 && lvl2Won == true && lives >0) {
+      } else if (timeLeft === 0 && lvl2Won == true && lives > 0) {
         //winning lvl 3
         clearInterval(interval);
         lifeText.innerText = 'You beat the game!!!'

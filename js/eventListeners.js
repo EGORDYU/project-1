@@ -48,6 +48,7 @@ window.addEventListener('keydown', (event) => {
         if (!isAnimating) {
             animate();
           }
+          projectiles= [];
           startBtn.style.display ='none';
           winTimer(player);
           gameEnd = false;
@@ -59,6 +60,7 @@ window.addEventListener('keydown', (event) => {
     
 
       nextlvlBtn2.addEventListener('click', function(){
+        projectiles= [];
         main.style.display = 'inline';
         nextlvlBtn2.style.display = 'none';
         lives = 3;
@@ -73,6 +75,7 @@ window.addEventListener('keydown', (event) => {
       })
 
       nextlvlBtn3.addEventListener('click', function(){
+        projectiles= [];
         main.style.display = 'inline';
         nextlvlBtn3.style.display = 'none';
         lives = 3;
