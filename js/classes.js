@@ -189,7 +189,7 @@ class Projectile2 {
     draw() {
       c.save();
       c.translate(this.x, this.y);
-      c.rotate(this.angle);
+    //   c.rotate(this.angle);
       c.fillStyle = 'purple';
       c.fillRect(0, 0, this.width, this.height);
       c.restore();
@@ -327,7 +327,7 @@ class Monster {
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
             const side = this.position.x < canvasCenterX ? 'left' : 'right'; // determine which side the monster is on
-            const projectile = new Projectile2(this.position.x, this.position.y, angle, 90, 90, side);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 120, 120, side);
             projectiles.push(projectile);
           }
       
