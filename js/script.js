@@ -36,6 +36,13 @@ pandaFace.onload = function() {
 pandaFace.src = './panda.png';
 
 
+const startScreenImg = new Image();
+startScreenImg.onload = function() {
+    c.drawImage(startScreenImg, 0, 0, canvas.width, canvas.height);
+}
+startScreenImg.src = './pandascreen.png';
+
+
 //ARRAY TO KEEP TRACK OF PROJECTILES
   let projectiles = [];
   let lives = 3;

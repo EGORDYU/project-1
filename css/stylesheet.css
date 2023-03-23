@@ -1,6 +1,9 @@
+*{
+    margin:0 auto;
+}
+
 body{
     background-color: wheat;
-    margin-left: 250px;
 }
 
 .livesLeft{
@@ -28,10 +31,12 @@ body{
 #main{
     display: flex;
     justify-content: center;
+
 }
 #canvas{
     background-color: black;
     justify-content: center;
+    margin-left: 300px;
 }
 #instructions{
     margin:0;
@@ -53,3 +58,4 @@ body{
     font-size: 30px;
     background-color: green;
 }
+ 
