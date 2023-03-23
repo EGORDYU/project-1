@@ -4,6 +4,7 @@ const startBtn = document.querySelector('#startBtn')
 const lossImg = document.querySelector('#lossImg')
 let main = document.querySelector('#main');
 let countdown = document.querySelector('#countdown');
+let lvlBtn1 = document.querySelector('#lvlBtn1')
 let nextlvlBtn2 = document.querySelector('#nextlvlBtn2');
 let nextlvlBtn3 = document.querySelector('#nextlvlBtn3');
 //c = context
@@ -87,6 +88,7 @@ function collision({
  
 
 //is in its own loop makes the game run
+//is in its own loop makes the game run
 function animate() {
     if (!isAnimating) {
         isAnimating = true;
@@ -100,7 +102,6 @@ function animate() {
     c.fillStyle = 'white';
     c.fillRect(0, 0, canvas.width, canvas.height);
   
-    
     background.update();
     
     collisionBlocks.forEach(collisionBlock => {
@@ -110,7 +111,7 @@ function animate() {
     platformBlocks.forEach(platformBlock => {
         platformBlock.update();
     })
-    
+    loss(lvlBtn1,animate);
     if(!gameEnd){
     player.update();
     monster2.update();
@@ -181,7 +182,7 @@ function animate2() {
     platformBlocks.forEach(platformBlock => {
         platformBlock.update();
     })
-
+    loss(nextlvlBtn2,animate2);
     if(!gameEnd){
         player2.update();
         monster22.update();
@@ -248,7 +249,7 @@ const background3 = new Sprite({
     })
 
     background3.update();
-
+    loss(nextlvlBtn3,animate3);
 
     console.log("game end is" + gameEnd);
     if(!gameEnd){
@@ -341,7 +342,41 @@ function winTimer(level){
         main.style.display = 'none';
         nextlvlBtn3.style.display = 'none';
         countdown.innerText = `You survived!`;
+      } else if (timeLeft === 0 && lvl3Won == true && lives > 0){
+        clearInterval(interval);
       }
     
 },1000)
 }
+
+function loss(btn, anim){
+if(lives <= 0){
+  clearInterval();
+  lifeText.innerText = "YOU LOST!"
+  lossImg.style.display = 'inline';
+  btn.style.display = 'inline';
+  btn.innerText = 'Try again';
+  player.position.x = 600;
+  player.position.y = 300;
+  isAnimating = false;
+  
+
+  btn.addEventListener('click', function(){
+      lives = 3;
+      lifeText.innerText = `Lives left: ${lives}`
+      btn.style.display = 'none';
+      lossImg.style.display = 'none';
+      isAnimating = true;
+
+      
+      if (!isAnimating) {
+          anim();
+          console.log('working');
+          
+        }
+        main.style.display = 'inline';
+  })
+  // gameEnd = true;
+} else {
+  lifeText.innerText = `Lives left: ${lives}`;
+}}

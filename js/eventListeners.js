@@ -56,7 +56,24 @@ window.addEventListener('keydown', (event) => {
           lossImg.style.display = 'none';
           lives = 3;
           lifeText.innerText = `Lives left: ${lives}`
+          
     })
+
+    lvlBtn1.addEventListener('click', function(){
+      
+        projectiles= [];
+        lvlBtn1.style.display ='none';
+        gameEnd = false;
+        main.style.display = 'inline';
+        lossImg.style.display = 'none';
+        lives = 3;
+        lifeText.innerText = `Lives left: ${lives}`
+        if (isAnimating) {
+          animate();
+        }
+        winTimer(player)
+        
+  })
     
 
       nextlvlBtn2.addEventListener('click', function(){
