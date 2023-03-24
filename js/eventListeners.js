@@ -111,3 +111,21 @@ window.addEventListener('keydown', (event) => {
           
 
       })
+
+      restartBtn.addEventListener('click', function(){
+        lvl1Won = false;
+        lvl2Won = false;
+        lvl3Won = false;
+        gameEnd = false;
+        lives = 3;
+
+
+        startScreenImg.src = './images/pandascreen.png';
+        lifeText.style.display = `Lives left: ${lives}`
+        main.style.display = 'inline';
+        restartBtn.style.display = 'none';
+        lvlBtn1.style.display ='inline';
+        lvlBtn1.innerText= 'Play again?';
+        countdown.innerText = "Survive 30 seconds in each stage to win!"
+        winImg.style.display = 'none';
+      })

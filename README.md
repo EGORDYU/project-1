@@ -5,8 +5,8 @@
 
 Be one of the last pandas on the brink of extinction trying to make it through the treacherous fields back to the safety of your bamboo forest. The idea of a typing game intrigues me. The panda will have to dodge projectiles from enemies increasing in number and different attacks to make it through each level (2 to start), while typing the words to be able to make it through. I plan on using canvas for the game.
 
-![pitch picture](pitch.png)
-
+![pitch picture](./images/pitch.png)
+https://egordyu.github.io/project-1/
 ## MVP
 
 * Have a game screen with a start button and instructions

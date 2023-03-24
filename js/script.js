@@ -8,6 +8,7 @@ let lvlBtn1 = document.querySelector('#lvlBtn1')
 let nextlvlBtn2 = document.querySelector('#nextlvlBtn2');
 let nextlvlBtn3 = document.querySelector('#nextlvlBtn3');
 let winImg = document.querySelector('#winImg');
+let restartBtn = document.querySelector('#restartBtn');
 //c = context
 const c = canvas.getContext('2d');
 // console.log(c);
@@ -320,7 +321,7 @@ const background3 = new Sprite({
 //calls animation
 //win function
 function winTimer(level){
-    let timeLeft = 30;
+    let timeLeft = 5;
     const interval = setInterval(() => {
       timeLeft--;
       countdown.innerText = `${timeLeft} seconds left`;
@@ -374,6 +375,7 @@ function winTimer(level){
         main.style.display = 'none';
         nextlvlBtn3.style.display = 'none';
         countdown.innerText = `You survived!`;
+        restartBtn.style.display = 'inline';
       } else if (timeLeft === 0 && lvl3Won == true && lives > 0){
         clearInterval(interval);
       }
