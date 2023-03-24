@@ -2,7 +2,7 @@
 const player = new Player({
     position:{
     x:600,
-    y:300,
+    y:500,
     },
     collisionBlocks,
     platformBlocks,
@@ -11,7 +11,7 @@ const player = new Player({
 const player2 = new Player({
     position: { 
     x: 600,
-    y: 300,
+    y: 500,
     },
     collisionBlocks: collisionBlocks2,
     platformBlocks: platformBlocks2
@@ -20,7 +20,7 @@ const player2 = new Player({
 const player3 = new Player({
     position: { 
     x: 600,
-    y: 300,
+    y: 500,
     },
 
     collisionBlocks: collisionBlocks3,

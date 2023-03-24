@@ -325,7 +325,7 @@ function winTimer(level){
     const interval = setInterval(() => {
       timeLeft--;
       countdown.innerText = `${timeLeft} seconds left`;
-      if(lives === 0){
+      if(lives <= 0){
         clearInterval(interval);
         countdown.innerText = `You had ${timeLeft+1} seconds left`
         lossImg.style.display = 'inline';
@@ -339,7 +339,7 @@ function winTimer(level){
         lifeText.innerText = 'YOU BEAT LVL 1 LETS GOOOOO'
         nextlvlBtn2.style.display = 'inline';
         level.position.x = 600;
-        level.position.y = 300;
+        level.position.y = 500;
         isAnimating = true;
         lvl1Won = true;
         main.style.display = 'none';
@@ -354,7 +354,7 @@ function winTimer(level){
         winImg.src = "./images/level2Won.jpg"
         lifeText.innerText = 'YOU BEAT LVL 2 LETS GOOOOO'
         level.position.x = 600;
-        level.position.y = 300;
+        level.position.y = 500;
         nextlvlBtn3.innerText = 'Next Level';
         nextlvlBtn3.style.display = 'inline';
         lvl2Won = true;
@@ -371,7 +371,7 @@ function winTimer(level){
         gameEnd=true;
         isAnimating=true
         level.position.x = 600;
-        level.position.y = 300;
+        level.position.y = 500;
         main.style.display = 'none';
         nextlvlBtn3.style.display = 'none';
         countdown.innerText = `You survived!`;
@@ -391,7 +391,7 @@ if(lives == 0){
   btn.style.display = 'inline';
   btn.innerText = 'Try again';
   player.position.x = 600;
-  player.position.y = 300;
+  player.position.y = 500;
   isAnimating = false;
   gameEnd = true;
   
