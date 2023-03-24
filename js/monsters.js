@@ -26,7 +26,7 @@ const monster1 = new Monster({
   const monster22 = new Monsterlvl2({
     position: { x: 800, y: 100 },
     imageSrc: './images/mutalisk2.png',
-    speed: { x: 5, y: 0 },
+    speed: { x: -5, y: 0 },
     distance: 1200,
   });
 
