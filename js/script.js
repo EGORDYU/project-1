@@ -321,7 +321,7 @@ const background3 = new Sprite({
 //calls animation
 //win function
 function winTimer(level){
-    let timeLeft = 5;
+    let timeLeft = 30;
     const interval = setInterval(() => {
       timeLeft--;
       countdown.innerText = `${timeLeft} seconds left`;
