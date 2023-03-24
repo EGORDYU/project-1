@@ -350,7 +350,7 @@ class Monster {
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
             const side = this.position.x < canvasCenterX ? 'left' : 'right'; // determine which side the monster is on
-            const projectile = new Projectile2(this.position.x, this.position.y, angle, 120, 120, side);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80, side);
             projectiles.push(projectile);
           }
       
@@ -447,7 +447,7 @@ class Monster {
             const canvasCenterY = this.position.y;
             const angle = Math.atan2(canvasCenterY - this.position.y, canvasCenterX - this.position.x);
             const side = this.position.x < canvasCenterX ? 'left' : 'right'; // determine which side the monster is on
-            const projectile = new Projectile2(this.position.x, this.position.y, angle, 90, 90, side);
+            const projectile = new Projectile2(this.position.x, this.position.y, angle, 80, 80, side);
             projectiles.push(projectile);
           }
       
