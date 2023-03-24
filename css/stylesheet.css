@@ -3,7 +3,10 @@
 }
 
 body{
-    background-color: lightgreen;
+background-image: url('../images/backgroundboo.jpg');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
 }
 
 .livesLeft{
@@ -11,11 +14,9 @@ body{
     width: 1366px;
     display: flex;
     justify-content: center; /* center child horizontally */
-    align-items: center; /* center child vertically */
+     /* center child vertically */
     height: 100%; /* set height to fill parent container */
-    
-    background-color: white;
-
+    background-color: beige;
 }
 
 #lifeText{
@@ -38,9 +39,9 @@ body{
 
 }
 #canvas{
+    display: flex;
     background-color: black;
     justify-content: center;
-    margin-left: 300px;
 }
 #instructions{
     margin:0;
