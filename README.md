@@ -3,7 +3,9 @@
 ## The general idea
 
 
-Be one of the last pandas on the brink of extinction trying to make it through the treacherous fields back to the safety of your bamboo forest. The idea of a typing game intrigues me. The panda will have to dodge projectiles from enemies increasing in number and different attacks to make it through each level (2 to start), while typing the words to be able to make it through. I plan on using canvas for the game.
+You play as a panda who woke up all alone in another part of his region. He must get back to his home, but there are enemies between him and his goal. Your goal is to dodge projectiles while the 30 second timer runs down. If you live with any lives you beat the level.
+
+
 
 ![pitch picture](./images/pitch.png)
 https://egordyu.github.io/project-1/
